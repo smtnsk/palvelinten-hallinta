@@ -20,29 +20,55 @@ oikeaa konettasi vastaava virtuaaliympäristö ja tee asetus siinä).
 
 ---
 
-Käytössä on juuri asennettu ja päivitetty Ubuntu 18.04.2 LTS, joten aloitan laittamalla SSH-asetukset ja palomuurin (pelkkä iptables) kuntoon. Jatkan asentamalla Saltin:
+Käytössä on juuri asennettu ja päivitetty Ubuntu 18.04.2 LTS, joten aloitan laittamalla SSH-asetukset ja palomuurin (pelkkä iptables) kuntoon. 
+Jatkan asentamalla Saltin:
 
 >sudo add-apt-repository universe  
 >sudo apt-get update  
 >sudo apt-get install salt-master  
 >sudo apt-get install salt-minion  
 
+Salt käyttää portteja 4505 ja 4506, mutta tällä kertaa master ja minion ovat samalla koneella, joten en avaa niitä palomuurista.
+Tarkistan statukset asennuksen jälkeen:
 
 ![screenshot-1](/assignments/H1/images/screenshot-1.png)
 
+Master ja minion ovat molemmat käynnissä.
+Laitetaan ne juttelemaan toisilleen muokkaamalla minionin asetuksia:
+
+>sudo nano /etc/salt/minion
+
 ![screenshot-2](/assignments/H1/images/screenshot-2.png)
+
+Tallennetaan tiedosto ylläolevien asetuksien jälkeen ja käynnistetään minioni uudestaan:
+
+>sudo systemctl restart salt-minion
+
+Katsotaan, mitä kävi:
 
 ![screenshot-3](/assignments/H1/images/screenshot-3.png)
 
+Jaha, Salt ei salli tabulaattorin käyttöä asetuksissa. Poistetaan ne:
+
 ![screenshot-4](/assignments/H1/images/screenshot-4.png)
+
+Uusi yritys:
 
 ![screenshot-5](/assignments/H1/images/screenshot-5.png)
 
+Kaikki ok. Laitetaan master hyväksymään minionin avain:
+
 ![screenshot-6](/assignments/H1/images/screenshot-6.png)
+
+Ajetaan pari komentoa testimielessä:
 
 ![screenshot-7](/assignments/H1/images/screenshot-7.png)
 
 ![screenshot-8](/assignments/H1/images/screenshot-8.png)
+
+Toimii.
+
+---
 
 ![screenshot-9](/assignments/H1/images/screenshot-9.png)
 
