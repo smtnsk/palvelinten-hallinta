@@ -18,14 +18,18 @@ omalta koneeltasi tai omalta virtuaalipalvelimelta. (Kannattaa kokeilla
 Saltia oikeassa elämässä, mutta jos se ei onnistu, rakenna jotain 
 oikeaa konettasi vastaava virtuaaliympäristö ja tee asetus siinä).
 
-----------------------------------------------------------------------
+---
 
 Käytössä on juuri asennettu ja päivitetty Ubuntu 18.04.2 LTS, joten aloitan laittamalla SSH-asetukset ja palomuurin (pelkkä iptables) kuntoon. Jatkan asentamalla Saltin:
 
 >sudo add-apt-repository universe
+
 >sudo apt-get update
+
 >sudo apt-get install salt-master
+
 >sudo apt-get install salt-minion
+
 
 ![screenshot-1](/assignments/H1/images/screenshot-1.png)
 
