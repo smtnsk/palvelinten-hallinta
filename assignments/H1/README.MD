@@ -20,8 +20,8 @@ oikeaa konettasi vastaava virtuaaliympäristö ja tee asetus siinä).
 
 ---
 
-Käytössä on juuri asennettu ja päivitetty Ubuntu 18.04.2 LTS, joten aloitan laittamalla SSH-asetukset ja palomuurin (pelkkä iptables) kuntoon.
-Kun olen saanut koneeseen SSH-yhteyden, jatkan asentamalla Saltin:
+Käytössä on virtuaalikoneelle juuri asennettu ja päivitetty Ubuntu 18.04.2 LTS, joten aloitan laittamalla SSH-asetukset ja palomuurin kuntoon.
+Kun olen saanut virtuaalikoneeseen SSH-yhteyden läppäriltäni, jatkan asentamalla Saltin:
 
 >sudo add-apt-repository universe\
 >sudo apt-get update\
