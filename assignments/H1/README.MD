@@ -119,4 +119,16 @@ Tietoja tulee rivikaupalla. Tallennetaan ne tiedostoon ja lasketaan samalla rivi
 
 Tässä esimerkki ensimmäisestä less-ruudullisesta:
 
-![screenshot-18](/assignments/H1/images/screenshot-19.png)
+![screenshot-19](/assignments/H1/images/screenshot-19.png)
+
+Kokeillaan vielä jonkin tietyn tiedon pyytämistä minionilta:
+
+![screenshot-20](/assignments/H1/images/screenshot-20.png)
+
+Kaikki grains-komennot saa listattua seuraavasti:
+
+>sudo salt '*' grains.ls
+
+---
+
+
