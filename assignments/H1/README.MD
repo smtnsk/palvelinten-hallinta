@@ -60,17 +60,17 @@ Kaikki ok. Laitetaan master hyväksymään minionin avain:
 
 ![screenshot-6](/assignments/H1/images/screenshot-6.png)
 
-Ajetaan pari komentoa testimielessä:
-
 ![screenshot-7](/assignments/H1/images/screenshot-7.png)
 
+Ajetaan pari komentoa testimielessä:
+
 ![screenshot-8](/assignments/H1/images/screenshot-8.png)
+
+![screenshot-9](/assignments/H1/images/screenshot-9.png)
 
 Toimii.
 
 ---
-
-![screenshot-9](/assignments/H1/images/screenshot-9.png)
 
 ![screenshot-10](/assignments/H1/images/screenshot-10.png)
 
