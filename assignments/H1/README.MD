@@ -1,5 +1,7 @@
 # H1
 
+### Tehtävänanto:
+
 * Asenna Salt Master ja Slave pull-arkkitehtuurilla (eli master on 
 server). Voit laittaa herran ja orjan myös samalle koneelle. Kokeile 
 suorittamalla salt:illa komentoja etänä.
