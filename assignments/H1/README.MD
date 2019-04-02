@@ -72,7 +72,7 @@ Toimii.
 
 ---
 
-Yritän ottaa mallia Joonan firewall statuksesta, mutta käyttämällä pelkkää iptablesia.
+Yritän ottaa mallia Laineen firewall statuksesta, mutta käyttämällä pelkkää iptablesia.
 Luodaan statukselle hakemisto ja tiedosto, joka pitää sisällään halutut iptables-säännöt:
 
 ![screenshot-10](/assignments/H1/images/screenshot-10.png)
@@ -131,4 +131,40 @@ Kaikki grains-komennot saa listattua seuraavasti:
 
 ---
 
+Kokeilen tehdä pilvipalvelimestani minionin ja siirtää palvelimen asetustiedostoja masterille myöhempää käyttöä varten. Todellisuudessa tämä olisi järkevämpi tehdä esim. Gitin avulla, mutta kokeillaan kuitenkin.
+Palvelimella on käyttöjärjestelmänä Arch Linuxiin pohjautuva Parabola.
+Asennan Saltin:
 
+![screenshot-21](/assignments/H1/images/screenshot-21.png)
+
+Avaan tarvittavat portit pilvipalvelimen palomuuriin:
+
+![screenshot-22](/assignments/H1/images/screenshot-22.png)
+
+Otan uuden säännön käyttöön:
+
+>sudo iptables-restore < /etc/iptables/iptables.rules.wg
+
+Muokkaan palvelimen salt-minionin osoittamaan masteria kohti ja käynnistän sen.
+Vilkaisen, näkeekö masteri sitä:
+
+![screenshot-23](/assignments/H1/images/screenshot-23.png)
+
+Kyllä, uusi avain oli odottamassa.
+Jotta tiedostonsiirto minionilta masterille cp-moduulilla olisi mahdollista, täytyy ensin muokata masterin asetuksia:
+
+>sudo nano /etc/salt/master
+
+![screenshot-24](/assignments/H1/images/screenshot-24.png)
+
+>sudo systemctl restart salt-master
+
+Kokeillaan hakea minionilta tiedostoja:
+
+![screenshot-25](/assignments/H1/images/screenshot-25.png)
+
+Näyttää toimivan. Tarkistetaan vielä, saapuivatko ne:
+
+![screenshot-26](/assignments/H1/images/screenshot-26.png)
+
+Siellähän ne.
