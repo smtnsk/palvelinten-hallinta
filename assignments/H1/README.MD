@@ -80,7 +80,8 @@ Luodaan statukselle hakemisto ja tiedosto, joka pitää sisällään halutut ipt
 ![screenshot-11](/assignments/H1/images/screenshot-11.png)
 
 IPv6 ei ole käytössä, joten tämä riittää.
-Nollataan olemassaolevat säännöt (SSH on käytössä, joten laitan komennot peräkkäin, että yhteys ei menisi poikki):
+Nollataan olemassaolevat säännöt ja sallitaan kaikki sisääntuleva liikenne (SSH on käytössä, joten laitan komennot peräkkäin, että en lukitsisi itseäni ulos):
+
 ![screenshot-12](/assignments/H1/images/screenshot-12.png)
 
 Luodaan itse status:
@@ -108,4 +109,14 @@ Moving on.
 
 ---
 
+Kerätään tietoja minionista Saltin grains-toiminnon avulla:
 
+>sudo salt 'ubuserver' grains.items
+
+Tietoja tulee rivikaupalla. Tallennetaan ne tiedostoon ja lasketaan samalla rivien määrä:
+
+![screenshot-18](/assignments/H1/images/screenshot-18.png)
+
+Tässä esimerkki ensimmäisestä less-ruudullisesta:
+
+![screenshot-18](/assignments/H1/images/screenshot-19.png)
