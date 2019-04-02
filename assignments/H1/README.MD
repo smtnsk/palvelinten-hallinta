@@ -20,7 +20,7 @@ oikeaa konettasi vastaava virtuaaliympäristö ja tee asetus siinä).
 
 ----------------------------------------------------------------------
 
-![screenshot-1](/images/screenshot-1.png)
+![screenshot-1](assignments/h1/images/screenshot-1.png)
 
 ![screenshot-2](/images/screenshot-2.png)
 
