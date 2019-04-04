@@ -2,23 +2,17 @@
 
 ### Tehtävänanto:
 
-* Asenna Salt Master ja Slave pull-arkkitehtuurilla (eli master on 
-server). Voit laittaa herran ja orjan myös samalle koneelle. Kokeile 
-suorittamalla salt:illa komentoja etänä.
+1. Asenna Salt Master ja Slave pull-arkkitehtuurilla (eli master on server). Voit laittaa herran ja orjan myös samalle koneelle. Kokeile suorittamalla salt:illa komentoja etänä.
 
-* Kokeile jotain [Laineen esimerkistä](https://github.com/joonaleppalahti/CCM/tree/master/salt/srv/salt) lainattua tilaa tai tee jostain 
-tilasta oma muunnelma. Muista testata lopputuloksen toimivuus. Huomaa, 
-että varastossa on myös keskeneräisiä esimerkkejä, kuten 
-Battlenet-asennus Windowsille.
+2. Kokeile jotain [Laineen esimerkistä](https://github.com/joonaleppalahti/CCM/tree/master/salt/srv/salt) lainattua tilaa tai tee jostain tilasta oma muunnelma. Muista testata lopputuloksen toimivuus. Huomaa, että varastossa on myös keskeneräisiäesimerkkejä, kuten Battlenet-asennus Windowsille.
 
-* Kerää laitetietoja koneilta saltin grains-mekanismilla.
+3. Kerää laitetietoja koneilta saltin grains-mekanismilla.
 
-* Oikeaa elämää. Säädä Saltilla jotain pientä, mutta oikeaa esimerkiksi
-omalta koneeltasi tai omalta virtuaalipalvelimelta. (Kannattaa kokeilla
-Saltia oikeassa elämässä, mutta jos se ei onnistu, rakenna jotain 
-oikeaa konettasi vastaava virtuaaliympäristö ja tee asetus siinä).
+4. Oikeaa elämää. Säädä Saltilla jotain pientä, mutta oikeaa esimerkiksi omalta koneeltasi tai omalta virtuaalipalvelimelta. (Kannattaa kokeilla Saltia oikeassa elämässä, mutta jos se ei onnistu, rakenna jotain oikeaa konettasi vastaava virtuaaliympäristö ja tee asetus siinä).
 
 ---
+
+### 1.
 
 Käytössä on virtuaalikoneelle juuri asennettu ja päivitetty Ubuntu 18.04.2 LTS, joten aloitan laittamalla SSH-asetukset ja palomuurin kuntoon.
 Kun olen saanut virtuaalikoneeseen SSH-yhteyden läppäriltäni, jatkan asentamalla Saltin:
@@ -62,7 +56,7 @@ Kaikki ok. Laitetaan master hyväksymään minionin avain:
 
 ![screenshot-7](/assignments/H1/images/screenshot-7.png)
 
-Ajetaan pari komentoa testimielessä:
+Ajetaan pari komentoa testiksi:
 
 ![screenshot-8](/assignments/H1/images/screenshot-8.png)
 
@@ -72,7 +66,9 @@ Toimii.
 
 ---
 
-Yritän ottaa mallia Laineen firewall statuksesta, mutta käyttämällä pelkkää iptablesia.
+### 2.
+
+Yritän ottaa mallia [Joona Leppälahden](https://github.com/joonaleppalahti/CCM/blob/master/salt/srv/salt/firewall.sls) firewall statuksesta, mutta käyttämällä pelkkää iptablesia.
 Luodaan statukselle hakemisto ja tiedosto, joka pitää sisällään halutut iptables-säännöt:
 
 ![screenshot-10](/assignments/H1/images/screenshot-10.png)
@@ -109,6 +105,8 @@ Moving on.
 
 ---
 
+### 3.
+
 Kerätään tietoja minionista Saltin grains-toiminnon avulla:
 
 >sudo salt 'ubuserver' grains.items
@@ -131,19 +129,23 @@ Kaikki grains-komennot saa listattua seuraavasti:
 
 ---
 
+## 4.
+
 Kokeilen tehdä pilvipalvelimestani minionin ja siirtää palvelimen asetustiedostoja masterille myöhempää käyttöä varten. Todellisuudessa tämä olisi järkevämpi tehdä esim. Gitin avulla, mutta kokeillaan kuitenkin.
 Palvelimella on käyttöjärjestelmänä Arch Linuxiin pohjautuva Parabola.
 Asennan Saltin:
 
 ![screenshot-21](/assignments/H1/images/screenshot-21.png)
 
-Avaan tarvittavat portit pilvipalvelimen palomuuriin:
+~~Avaan tarvittavat portit pilvipalvelimen palomuuriin:
 
 ![screenshot-22](/assignments/H1/images/screenshot-22.png)
 
-Otan uuden säännön käyttöön:
+~~Otan uuden säännön käyttöön:
 
->sudo iptables-restore < /etc/iptables/iptables.rules.wg
+~~>sudo iptables-restore < /etc/iptables/iptables.rules.wg
+
+**Edit:** Tajusin jälkeenpäin, että tämä oli täysin turhaa. Kaikki data koneiden välillä kulkee jo-sallitun Wireguard-tunnelin kautta (_-A INPUT -i wg0 -j ACCEPT_).
 
 Muokkaan palvelimen salt-minionin osoittamaan masteria kohti ja käynnistän sen.
 Vilkaisen, näkeekö masteri sitä:
@@ -151,7 +153,7 @@ Vilkaisen, näkeekö masteri sitä:
 ![screenshot-23](/assignments/H1/images/screenshot-23.png)
 
 Kyllä, uusi avain oli odottamassa.
-Jotta tiedostonsiirto minionilta masterille cp-moduulilla olisi mahdollista, täytyy ensin muokata masterin asetuksia:
+Jotta tiedostojen siirto minionilta masterille cp-moduulilla olisi mahdollista, täytyy ensin muokata masterin asetuksia:
 
 >sudo nano /etc/salt/master
 
@@ -163,7 +165,7 @@ Kokeillaan hakea minionilta tiedostoja:
 
 ![screenshot-25](/assignments/H1/images/screenshot-25.png)
 
-Näyttää toimivan. Tarkistetaan vielä, saapuivatko ne:
+Näyttää toimivan. Tarkistetaan vielä, saapuivatko tiedostot:
 
 ![screenshot-26](/assignments/H1/images/screenshot-26.png)
 
