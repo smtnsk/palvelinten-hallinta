@@ -139,13 +139,13 @@ Asennan Saltin:
 
 ![screenshot-21](/assignments/H1/images/screenshot-21.png)
 
-~~Avaan tarvittavat portit pilvipalvelimen palomuuriin:
+~~Avaan tarvittavat portit pilvipalvelimen palomuuriin:~~
 
 ![screenshot-22](/assignments/H1/images/screenshot-22.png)
 
-~~Otan uuden säännön käyttöön:
+~~Otan uuden säännön käyttöön:~~
 
-~~>sudo iptables-restore < /etc/iptables/iptables.rules.wg
+~~>sudo iptables-restore < /etc/iptables/iptables.rules.wg~~
 
 **Edit:** Tajusin jälkeenpäin, että tämä oli täysin turhaa. Kaikki data koneiden välillä kulkee jo-sallitun Wireguard-tunnelin kautta (_-A INPUT -i wg0 -j ACCEPT_).
 
