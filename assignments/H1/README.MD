@@ -1,6 +1,8 @@
-# H1
+## **H1 - Hello Salt!** Master-slave, pull -arkkitehtuuri.
 
-### Tehtävänanto:
+http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja-3001-to-loppukevat-2019
+
+#### Tehtävänanto:
 
 1. Asenna Salt Master ja Slave pull-arkkitehtuurilla (eli master on server). Voit laittaa herran ja orjan myös samalle koneelle. Kokeile suorittamalla salt:illa komentoja etänä.
 
@@ -12,9 +14,9 @@
 
 ---
 
-### 1.
+#### 1.
 
-Käytössä on virtuaalikoneelle juuri asennettu ja päivitetty Ubuntu 18.04.2 LTS, joten aloitan laittamalla SSH-asetukset ja palomuurin kuntoon.
+Käytössä on virtuaalikoneelle (Hyper-V) juuri asennettu ja päivitetty Ubuntu 18.04.2 LTS x64 (isäntäkoneella Windows Embedded 8.1 Industry Pro x64), joten aloitan laittamalla SSH-asetukset ja palomuurin kuntoon. 
 Kun olen saanut virtuaalikoneeseen SSH-yhteyden läppäriltäni, jatkan asentamalla Saltin:
 
 >sudo add-apt-repository universe\
@@ -44,7 +46,7 @@ Katsotaan, mitä kävi:
 
 Jaha, Salt ei salli tabulaattorin käyttöä asetuksissa. Poistetaan ne:
 
-![screenshot-4](/assignments/H1/images/screenshot-4.png)
+>sudo sed -i 's/\t/ /g' /etc/salt/minion 
 
 Uusi yritys:
 
@@ -66,7 +68,7 @@ Toimii.
 
 ---
 
-### 2.
+#### 2.
 
 Yritän ottaa mallia [Joona Leppälahden](https://github.com/joonaleppalahti/CCM/blob/master/salt/srv/salt/firewall.sls) firewall statuksesta, mutta käyttämällä pelkkää iptablesia.
 Luodaan statukselle hakemisto ja tiedosto, joka pitää sisällään halutut iptables-säännöt:
@@ -105,7 +107,7 @@ Moving on.
 
 ---
 
-### 3.
+#### 3.
 
 Kerätään tietoja minionista Saltin grains-toiminnon avulla:
 
@@ -129,7 +131,7 @@ Kaikki grains-komennot saa listattua seuraavasti:
 
 ---
 
-## 4.
+#### 4.
 
 Kokeilen tehdä pilvipalvelimestani minionin ja siirtää palvelimen asetustiedostoja masterille myöhempää käyttöä varten. Todellisuudessa tämä olisi järkevämpi tehdä esim. Gitin avulla, mutta kokeillaan kuitenkin.
 Palvelimella on käyttöjärjestelmänä Arch Linuxiin pohjautuva Parabola.
