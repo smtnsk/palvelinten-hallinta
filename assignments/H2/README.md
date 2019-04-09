@@ -350,7 +350,7 @@ Tarkistetaan:
 
 ![apache-user-disabled-2](/assignments/H2/images/apache-user-disabled-2.png)
 
-Ei toimi. Unohdin käynnistää Apachen uudelleen. Korjaus:
+Ei toimi. Unohdin käynnistää Apachen uudelleen. Laitan sivut pois päältä kuten aiemmin (```sudo a2dismod userdir```) ja korjaan tilan:
 ```
 [smtnskn@ERIDU ~]$ sudo cat /srv/salt/apache.sls 
 apache2:
