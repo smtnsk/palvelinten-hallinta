@@ -21,7 +21,7 @@ Lisäksi käytössä läppäri, hostnamella LAPTOP.
 
 #### 1.
 
-Luon masterilla sshd-tilan:
+Luodaan masterilla sshd-tila:
 ```
 [smtnskn@ERIDU ~]$ sudo nano /srv/salt/sshd.sls
 [smtnskn@ERIDU ~]$ cat /srv/salt/sshd.sls
@@ -33,7 +33,7 @@ openssh-server:
     - source: salt://sshd_config
 ```
 
-...sekä sen käyttämän sshd_config -tiedoston:
+...sekä sen käyttämä sshd_config -tiedosto:
 ```
 [smtnskn@ERIDU ~]$ sudo cp -v /etc/ssh/sshd_config /srv/salt/
 '/etc/ssh/sshd_config' -> '/srv/salt/sshd_config'
@@ -224,3 +224,247 @@ Protocol 2
 smtnskn@ubuserver:~$ 
 ```
 ---
+
+#### 2.
+
+Asennetaan Apache:
+```
+smtnskn@ubuserver:~$ sudo apt-get install apache2 -y
+```
+Kokeillaan näkyykö oletussivu:
+
+![apache-default](/assignments/H2/images/apache-default.png)
+
+Luodaan käyttäjälle oma sivu ja otetaan se käyttöön:
+```
+smtnskn@ubuserver:~$ mkdir ~/public_html
+smtnskn@ubuserver:~$ nano ~/public_html/index.html
+smtnskn@ubuserver:~$ cat ~/public_html/index.html
+<!doctype html>
+<html lang=en>
+
+<head>
+	<meta charset=utf-8>
+	<title>A website</title>
+</head>
+<body>
+  <center>
+  	<h1>Testi</h1>
+  </center>
+</body>
+</html>
+smtnskn@ubuserver:~$ sudo a2enmod userdir
+Enabling module userdir.
+To activate the new configuration, you need to run:
+  systemctl restart apache2
+smtnskn@ubuserver:~$ sudo systemctl restart apache2
+```
+Kokeillaan näkyykö käyttäjän sivu:
+
+![apache-user-enabled](/assignments/H2/images/apache-user-enabled.png)
+
+Luodaan tila, joka automatisoi käyttäjien sivujen käyttöönoton. Katsotaan ensin, mitä asetustiedostoja tarvitsemme:
+```
+smtnskn@ubuserver:~$ sudo find /etc/ -printf '%T+ %p\n' | sort | tail -n 5
+2019-04-09+20:40:56.4938979250 /etc/ld.so.cache
+2019-04-09+20:40:56.5058977270 /etc/
+2019-04-09+21:10:28.8076895180 /etc/apache2/mods-enabled
+2019-04-09+21:10:28.8076895180 /etc/apache2/mods-enabled/userdir.conf
+2019-04-09+21:10:28.8076895180 /etc/apache2/mods-enabled/userdir.load
+```
+Vain 2. Luodaan itse tila ja symlinkataan sillä nuo tiedostot:
+```
+[smtnskn@ERIDU ~]$ sudo nano /srv/salt/apache.sls
+[smtnskn@ERIDU ~]$ sudo cat /srv/salt/apache.sls
+apache2:
+  pkg.installed
+
+/etc/apache2/mods-enabled/userdir.conf:
+  file.symlink:
+    - target: /etc/apache2/mods-available/userdir.conf
+
+/etc/apache2/mods-enabled/userdir.load:
+  file.symlink:
+    - target: /etc/apache2/mods-available/userdir.load
+```
+Laitetaan minionilla käyttäjäsivut pois päältä:
+```
+smtnskn@ubuserver:~$ sudo a2dismod userdir
+Module userdir disabled.
+To activate the new configuration, you need to run:
+  systemctl restart apache2
+smtnskn@ubuserver:~$ systemctl restart apache2
+```
+Varmistetaan:
+
+![apache-user-disabled](/assignments/H2/images/apache-user-disabled.png)
+
+Laitetaan ne takaisin päälle Saltin avulla:
+```
+[smtnskn@ERIDU ~]$ sudo salt '*' state.apply apache
+[WARNING ] /usr/lib/python2.7/site-packages/salt/payload.py:149: DeprecationWarning: encoding is deprecated, Use raw=False instead.
+  ret = msgpack.loads(msg, use_list=True, ext_hook=ext_type_decoder, encoding=encoding)
+
+ubuserver:
+----------
+          ID: apache2
+    Function: pkg.installed
+      Result: True
+     Comment: All specified packages are already installed
+     Started: 21:46:38.470224
+    Duration: 244.977 ms
+     Changes:   
+----------
+          ID: /etc/apache2/mods-enabled/userdir.conf
+    Function: file.symlink
+      Result: True
+     Comment: Created new symlink /etc/apache2/mods-enabled/userdir.conf -> /etc/apache2/mods-available/userdir.conf
+     Started: 21:46:38.718167
+    Duration: 1.036 ms
+     Changes:   
+              ----------
+              new:
+                  /etc/apache2/mods-enabled/userdir.conf
+----------
+          ID: /etc/apache2/mods-enabled/userdir.load
+    Function: file.symlink
+      Result: True
+     Comment: Created new symlink /etc/apache2/mods-enabled/userdir.load -> /etc/apache2/mods-available/userdir.load
+     Started: 21:46:38.719276
+    Duration: 0.746 ms
+     Changes:   
+              ----------
+              new:
+                  /etc/apache2/mods-enabled/userdir.load
+
+Summary for ubuserver
+------------
+Succeeded: 3 (changed=2)
+Failed:    0
+------------
+Total states run:     3
+Total run time: 246.759 ms
+```
+
+Tarkistetaan:
+
+![apache-user-disabled-2](/assignments/H2/images/apache-user-disabled-2.png)
+
+Ei toimi. Unohdin käynnistää Apachen uudelleen. Korjaus:
+```
+[smtnskn@ERIDU ~]$ sudo cat /srv/salt/apache.sls 
+apache2:
+  pkg.installed
+  service.running:
+    - watch:
+      - file: /etc/apache2/mods-enabled/userdir.conf
+      - file: /etc/apache2/mods-enabled/userdir.load
+
+/etc/apache2/mods-enabled/userdir.conf:
+  file.symlink:
+    - target: /etc/apache2/mods-available/userdir.conf
+
+/etc/apache2/mods-enabled/userdir.load:
+  file.symlink:
+    - target: /etc/apache2/mods-available/userdir.load
+[smtnskn@ERIDU ~]$ 
+```
+
+Suoritan ```sudo salt '*' state.apply apache```:
+```
+[smtnskn@ERIDU ~]$ sudo salt '*' state.apply apache
+[WARNING ] /usr/lib/python2.7/site-packages/salt/payload.py:149: DeprecationWarning: encoding is deprecated, Use raw=False instead.
+  ret = msgpack.loads(msg, use_list=True, ext_hook=ext_type_decoder, encoding=encoding)
+
+ubuserver:
+    Data failed to compile:
+----------
+    Rendering SLS 'base:apache' failed: mapping values are not allowed here; line 3
+
+---
+apache2:
+  pkg.installed
+  service.running:    <======================
+    - watch:
+      - file: /etc/apache2/mods-enabled/userdir.conf
+      - file: /etc/apache2/mods-enabled/userdir.load
+
+/etc/apache2/mods-enabled/userdir.conf:
+[...]
+---
+ERROR: Minions returned with non-zero exit code
+```
+
+Jaha. Lisää muutoksia:
+```
+[smtnskn@ERIDU ~]$ sudo nano /srv/salt/apache.sls 
+[smtnskn@ERIDU ~]$ sudo head -n 2 /srv/salt/apache.sls 
+apache2:
+  pkg.installed: []
+```
+
+Eli muutin ```pkg_installed``` -> ```pkg_installed: []```
+Uusi uritys:
+```
+[smtnskn@ERIDU ~]$ sudo salt '*' state.apply apache
+[WARNING ] /usr/lib/python2.7/site-packages/salt/payload.py:149: DeprecationWarning: encoding is deprecated, Use raw=False instead.
+  ret = msgpack.loads(msg, use_list=True, ext_hook=ext_type_decoder, encoding=encoding)
+
+ubuserver:
+----------
+          ID: apache2
+    Function: pkg.installed
+      Result: True
+     Comment: All specified packages are already installed
+     Started: 22:11:05.003529
+    Duration: 256.378 ms
+     Changes:   
+----------
+          ID: /etc/apache2/mods-enabled/userdir.conf
+    Function: file.symlink
+      Result: True
+     Comment: Created new symlink /etc/apache2/mods-enabled/userdir.conf -> /etc/apache2/mods-available/userdir.conf
+     Started: 22:11:05.264370
+    Duration: 1.167 ms
+     Changes:   
+              ----------
+              new:
+                  /etc/apache2/mods-enabled/userdir.conf
+----------
+          ID: /etc/apache2/mods-enabled/userdir.load
+    Function: file.symlink
+      Result: True
+     Comment: Created new symlink /etc/apache2/mods-enabled/userdir.load -> /etc/apache2/mods-available/userdir.load
+     Started: 22:11:05.265616
+    Duration: 0.815 ms
+     Changes:   
+              ----------
+              new:
+                  /etc/apache2/mods-enabled/userdir.load
+----------
+          ID: apache2
+    Function: service.running
+      Result: True
+     Comment: Service restarted
+     Started: 22:11:05.293301
+    Duration: 134.469 ms
+     Changes:   
+              ----------
+              apache2:
+                  True
+
+Summary for ubuserver
+------------
+Succeeded: 4 (changed=3)
+Failed:    0
+------------
+Total states run:     4
+Total run time: 392.829 ms
+```
+
+No niin! Ja kokeillaan sivua:
+
+![apache-user-enabled-2](/assignments/H2/images/apache-user-enabled-2.png)
+
+---
+
