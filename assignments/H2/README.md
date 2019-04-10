@@ -403,7 +403,7 @@ apache2:
   pkg.installed: []
 ```
 
-Eli muutin ```pkg.installed``` -> ```pkg_installed: []```
+Eli muutin ```pkg.installed``` -> ```pkg.installed: []```
 Uusi uritys:
 ```
 [smtnskn@MASTER ~]$ sudo salt '*' state.apply apache
@@ -470,4 +470,4 @@ No niin! Ja kokeillaan sivua:
 
 #### 3.
 
-Ideani oli tehdä valmis profile -tiedosto bashia varten ja peilata se minion(e)ille, mutta en löytänyt Saltin dokumentaatiosta tapaa ottaa uutta tiedostoa käyttöön sen muttuessa (eli ajaa komento ```. etc/profile```). Tuhlasin tämän tukimiseen niin paljon aikaa, että en ehtinyt enää tehdä tehtävää muulla tavalla.
+Ideani oli tehdä valmis profile -tiedosto bashia varten ja peilata se minion(e)ille, mutta en löytänyt Saltin dokumentaatiosta tapaa ottaa uutta tiedostoa käyttöön sen muuttuessa (eli ajaa komento ```. etc/profile```). Tuhlasin tämän tukimiseen niin paljon aikaa, että en ehtinyt enää tehdä tehtävää muulla tavalla.
