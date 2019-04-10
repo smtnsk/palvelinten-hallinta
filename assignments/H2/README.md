@@ -12,10 +12,10 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 #### Ympäristö:
 
-Master (hostname ERIDU): Pilvipalvelimella pyörivä Parabola GNU/Linux-libre x64.\
-Minion (hostname ubuserver): Hyper-V -virtuaalikoneella pyörivä Ubuntu 18.04.2 LTS x64, isäntäkoneella Windows Embedded 8.1 Industry Pro x64.
+Master (hostname MASTER): Pilvipalvelimella pyörivä Parabola GNU/Linux-libre x64.\
+Minion (hostname MINION): Hyper-V -virtuaalikoneella pyörivä Ubuntu 18.04.2 LTS x64, isäntäkoneella Windows Embedded 8.1 Industry Pro x64.
 
-Lisäksi käytössä läppäri, hostnamella LAPTOP.
+Lisäksi käytössä MacBook Air, hostnamella LAPTOP.
 
 ---
 
@@ -23,8 +23,8 @@ Lisäksi käytössä läppäri, hostnamella LAPTOP.
 
 Luodaan masterilla sshd-tila:
 ```
-[smtnskn@ERIDU ~]$ sudo nano /srv/salt/sshd.sls
-[smtnskn@ERIDU ~]$ cat /srv/salt/sshd.sls
+[smtnskn@MASTER ~]$ sudo nano /srv/salt/sshd.sls
+[smtnskn@MASTER ~]$ cat /srv/salt/sshd.sls
 openssh-server:
   pkg.installed
 
@@ -35,10 +35,10 @@ openssh-server:
 
 ...sekä sen käyttämä sshd_config -tiedosto:
 ```
-[smtnskn@ERIDU ~]$ sudo cp -v /etc/ssh/sshd_config /srv/salt/
+[smtnskn@MASTER ~]$ sudo cp -v /etc/ssh/sshd_config /srv/salt/
 '/etc/ssh/sshd_config' -> '/srv/salt/sshd_config'
-[smtnskn@ERIDU ~]$ sudo nano /srv/salt/sshd_config
-[smtnskn@ERIDU ~]$ sudo cat /srv/salt/sshd_config
+[smtnskn@MASTER ~]$ sudo nano /srv/salt/sshd_config
+[smtnskn@MASTER ~]$ sudo cat /srv/salt/sshd_config
 ## Managed file - DO NOT EDIT
 
 Protocol 2
@@ -70,8 +70,8 @@ Subsystem	sftp	/usr/lib/ssh/sftp-server
 
 Käsketään minionia ottamaan asetukset käyttöön:
 ```
-[smtnskn@ERIDU ~]$ sudo salt '*' state.apply sshd
-ubuserver:
+[smtnskn@MASTER ~]$ sudo salt '*' state.apply sshd
+MINION:
 ----------
           ID: openssh-server
     Function: pkg.installed
@@ -91,7 +91,7 @@ ubuserver:
 ```
 [pitkä diff leikattu pois]
 ```
-Summary for ubuserver
+Summary for MINION
 ------------
 Succeeded: 2 (changed=1)
 Failed:    0
@@ -102,7 +102,7 @@ Total run time: 913.568 ms
 
 Kokeillaan toimiiko:
 ```
-smtnskn@ubuserver:~$ sudo systemctl restart ssh.service
+smtnskn@MINION:~$ sudo systemctl restart ssh.service
 ```
 ```
 LAPTOP:smtnskn ~> ssh smtnskn@192.168.2.103 -p 8888
@@ -135,14 +135,14 @@ Welcome to Ubuntu 18.04.2 LTS (GNU/Linux 4.15.0-47-generic x86_64)
 
 
 Last login: Tue Apr  9 17:58:39 2019 from 192.168.2.102
-smtnskn@ubuserver:~$ 
+smtnskn@MINION:~$ 
 ```
 
 Toimii. Laitetaan vielä ssh -service käynnistymään uudelleen aina sshd_config -tiedoston muuttuessa lisäämällä sshd -tilan loppuun seuraavaa:
 
 ```
-[smtnskn@ERIDU ~]$ sudo nano /srv/salt/sshd.sls
-[smtnskn@ERIDU ~]$ sudo tail -n 5 /srv/salt/sshd.sls
+[smtnskn@MASTER ~]$ sudo nano /srv/salt/sshd.sls
+[smtnskn@MASTER ~]$ sudo tail -n 5 /srv/salt/sshd.sls
 
 sshd:
   service.running:
@@ -152,18 +152,18 @@ sshd:
 
 Tehdään sshd_configiin muutos masterin puolella ja pusketaan se minionille:
 ```
-[smtnskn@ERIDU ~]$ sudo nano /srv/salt/sshd_config
-[smtnskn@ERIDU ~]$ sudo head -n 5 /srv/salt/sshd_config 
+[smtnskn@MASTER ~]$ sudo nano /srv/salt/sshd_config
+[smtnskn@MASTER ~]$ sudo head -n 5 /srv/salt/sshd_config 
 ## Managed file - DO NOT EDIT
 
 ## hi, this is a test
 
 Protocol 2
-[smtnskn@ERIDU ~]$ sudo salt '*' state.apply sshd
+[smtnskn@MASTER ~]$ sudo salt '*' state.apply sshd
 [WARNING ] /usr/lib/python2.7/site-packages/salt/payload.py:149: DeprecationWarning: encoding is deprecated, Use raw=False instead.
   ret = msgpack.loads(msg, use_list=True, ext_hook=ext_type_decoder, encoding=encoding)
 
-ubuserver:
+MINION:
 ----------
           ID: openssh-server
     Function: pkg.installed
@@ -203,7 +203,7 @@ ubuserver:
               sshd:
                   True
 
-Summary for ubuserver
+Summary for MINION
 ------------
 Succeeded: 3 (changed=2)
 Failed:    0
@@ -215,13 +215,13 @@ Total run time:   1.034 s
 Ja tarkistetaan vielä minionin puolella:
 
 ```
-smtnskn@ubuserver:~$ head -n 5 /etc/ssh/sshd_config
+smtnskn@MINION:~$ head -n 5 /etc/ssh/sshd_config
 ## Managed file - DO NOT EDIT
 
 ## hi, this is a test
 
 Protocol 2
-smtnskn@ubuserver:~$ 
+smtnskn@MINION:~$ 
 ```
 ---
 
@@ -229,7 +229,7 @@ smtnskn@ubuserver:~$
 
 Asennetaan Apache:
 ```
-smtnskn@ubuserver:~$ sudo apt-get install apache2 -y
+smtnskn@MINION:~$ sudo apt-get install apache2 -y
 ```
 Kokeillaan näkyykö oletussivu:
 
@@ -237,9 +237,9 @@ Kokeillaan näkyykö oletussivu:
 
 Luodaan käyttäjälle oma sivu ja otetaan se käyttöön:
 ```
-smtnskn@ubuserver:~$ mkdir ~/public_html
-smtnskn@ubuserver:~$ nano ~/public_html/index.html
-smtnskn@ubuserver:~$ cat ~/public_html/index.html
+smtnskn@MINION:~$ mkdir ~/public_html
+smtnskn@MINION:~$ nano ~/public_html/index.html
+smtnskn@MINION:~$ cat ~/public_html/index.html
 <!doctype html>
 <html lang=en>
 
@@ -253,11 +253,11 @@ smtnskn@ubuserver:~$ cat ~/public_html/index.html
   </center>
 </body>
 </html>
-smtnskn@ubuserver:~$ sudo a2enmod userdir
+smtnskn@MINION:~$ sudo a2enmod userdir
 Enabling module userdir.
 To activate the new configuration, you need to run:
   systemctl restart apache2
-smtnskn@ubuserver:~$ sudo systemctl restart apache2
+smtnskn@MINION:~$ sudo systemctl restart apache2
 ```
 Kokeillaan näkyykö käyttäjän sivu:
 
@@ -265,7 +265,7 @@ Kokeillaan näkyykö käyttäjän sivu:
 
 Luodaan tila, joka automatisoi käyttäjien sivujen käyttöönoton. Katsotaan ensin, mitä asetustiedostoja tarvitsemme:
 ```
-smtnskn@ubuserver:~$ sudo find /etc/ -printf '%T+ %p\n' | sort | tail -n 5
+smtnskn@MINION:~$ sudo find /etc/ -printf '%T+ %p\n' | sort | tail -n 5
 2019-04-09+20:40:56.4938979250 /etc/ld.so.cache
 2019-04-09+20:40:56.5058977270 /etc/
 2019-04-09+21:10:28.8076895180 /etc/apache2/mods-enabled
@@ -274,8 +274,8 @@ smtnskn@ubuserver:~$ sudo find /etc/ -printf '%T+ %p\n' | sort | tail -n 5
 ```
 Vain 2. Luodaan itse tila ja symlinkataan sillä nuo tiedostot:
 ```
-[smtnskn@ERIDU ~]$ sudo nano /srv/salt/apache.sls
-[smtnskn@ERIDU ~]$ sudo cat /srv/salt/apache.sls
+[smtnskn@MASTER ~]$ sudo nano /srv/salt/apache.sls
+[smtnskn@MASTER ~]$ sudo cat /srv/salt/apache.sls
 apache2:
   pkg.installed
 
@@ -289,11 +289,11 @@ apache2:
 ```
 Laitetaan minionilla käyttäjäsivut pois päältä:
 ```
-smtnskn@ubuserver:~$ sudo a2dismod userdir
+smtnskn@MINION:~$ sudo a2dismod userdir
 Module userdir disabled.
 To activate the new configuration, you need to run:
   systemctl restart apache2
-smtnskn@ubuserver:~$ systemctl restart apache2
+smtnskn@MINION:~$ systemctl restart apache2
 ```
 Varmistetaan:
 
@@ -301,11 +301,11 @@ Varmistetaan:
 
 Laitetaan ne takaisin päälle Saltin avulla:
 ```
-[smtnskn@ERIDU ~]$ sudo salt '*' state.apply apache
+[smtnskn@MASTER ~]$ sudo salt '*' state.apply apache
 [WARNING ] /usr/lib/python2.7/site-packages/salt/payload.py:149: DeprecationWarning: encoding is deprecated, Use raw=False instead.
   ret = msgpack.loads(msg, use_list=True, ext_hook=ext_type_decoder, encoding=encoding)
 
-ubuserver:
+MINION:
 ----------
           ID: apache2
     Function: pkg.installed
@@ -337,7 +337,7 @@ ubuserver:
               new:
                   /etc/apache2/mods-enabled/userdir.load
 
-Summary for ubuserver
+Summary for MINION
 ------------
 Succeeded: 3 (changed=2)
 Failed:    0
@@ -352,7 +352,7 @@ Tarkistetaan:
 
 Ei toimi. Unohdin käynnistää Apachen uudelleen. Laitan sivut pois päältä kuten aiemmin (```sudo a2dismod userdir```) ja korjaan tilan:
 ```
-[smtnskn@ERIDU ~]$ sudo cat /srv/salt/apache.sls 
+[smtnskn@MASTER ~]$ sudo cat /srv/salt/apache.sls 
 apache2:
   pkg.installed
   service.running:
@@ -367,16 +367,16 @@ apache2:
 /etc/apache2/mods-enabled/userdir.load:
   file.symlink:
     - target: /etc/apache2/mods-available/userdir.load
-[smtnskn@ERIDU ~]$ 
+[smtnskn@MASTER ~]$ 
 ```
 
 Suoritan ```sudo salt '*' state.apply apache```:
 ```
-[smtnskn@ERIDU ~]$ sudo salt '*' state.apply apache
+[smtnskn@MASTER ~]$ sudo salt '*' state.apply apache
 [WARNING ] /usr/lib/python2.7/site-packages/salt/payload.py:149: DeprecationWarning: encoding is deprecated, Use raw=False instead.
   ret = msgpack.loads(msg, use_list=True, ext_hook=ext_type_decoder, encoding=encoding)
 
-ubuserver:
+MINION:
     Data failed to compile:
 ----------
     Rendering SLS 'base:apache' failed: mapping values are not allowed here; line 3
@@ -397,8 +397,8 @@ ERROR: Minions returned with non-zero exit code
 
 Jaha. Lisää muutoksia:
 ```
-[smtnskn@ERIDU ~]$ sudo nano /srv/salt/apache.sls 
-[smtnskn@ERIDU ~]$ sudo head -n 2 /srv/salt/apache.sls 
+[smtnskn@MASTER ~]$ sudo nano /srv/salt/apache.sls 
+[smtnskn@MASTER ~]$ sudo head -n 2 /srv/salt/apache.sls 
 apache2:
   pkg.installed: []
 ```
@@ -406,11 +406,11 @@ apache2:
 Eli muutin ```pkg.installed``` -> ```pkg_installed: []```
 Uusi uritys:
 ```
-[smtnskn@ERIDU ~]$ sudo salt '*' state.apply apache
+[smtnskn@MASTER ~]$ sudo salt '*' state.apply apache
 [WARNING ] /usr/lib/python2.7/site-packages/salt/payload.py:149: DeprecationWarning: encoding is deprecated, Use raw=False instead.
   ret = msgpack.loads(msg, use_list=True, ext_hook=ext_type_decoder, encoding=encoding)
 
-ubuserver:
+MINION:
 ----------
           ID: apache2
     Function: pkg.installed
@@ -453,7 +453,7 @@ ubuserver:
               apache2:
                   True
 
-Summary for ubuserver
+Summary for MINION
 ------------
 Succeeded: 4 (changed=3)
 Failed:    0
@@ -470,3 +470,4 @@ No niin! Ja kokeillaan sivua:
 
 #### 3.
 
+Ideani oli tehdä valmis profile -tiedosto bashia varten ja peilata se minion(e)ille, mutta en löytänyt Saltin dokumentaatiosta tapaa ottaa uutta tiedostoa käyttöön sen muttuessa (eli ajaa komento ```. etc/profile```). Tuhlasin tämän tukimiseen niin paljon aikaa, että en ehtinyt enää tehdä tehtävää muulla tavalla.
