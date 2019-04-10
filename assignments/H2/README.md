@@ -403,7 +403,7 @@ apache2:
   pkg.installed: []
 ```
 
-Eli muutin ```pkg_installed``` -> ```pkg_installed: []```
+Eli muutin ```pkg.installed``` -> ```pkg_installed: []```
 Uusi uritys:
 ```
 [smtnskn@ERIDU ~]$ sudo salt '*' state.apply apache
@@ -467,4 +467,6 @@ No niin! Ja kokeillaan sivua:
 ![apache-user-enabled-2](/assignments/H2/images/apache-user-enabled-2.png)
 
 ---
+
+#### 3.
 
