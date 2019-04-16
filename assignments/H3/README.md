@@ -26,6 +26,8 @@ Laitoin aluksi käyttäjäasetukset kuntoon:\
 Jatkoin kloonamalla tätä tehtävää varten luomani repositorion:\
 ![git-clone](/assignments/H3/images/git-clone.png)
 
+---
+
 ### 1. Komennot ‘git log’, ‘git diff’ ja ‘git blame’.
 
 #### 1.1 Log
@@ -47,9 +49,9 @@ Kutsuin tässä välissä `git add .`
 Muokkasin tiedostoa ja katsoin mitä `git diff` sanoo:\
 ![git-diff](/assignments/H3/images/git-diff.png)
 
-`git diff` näyttää mitä muutoksia edellisen indeksin muutoksen (`git add`) jälkeen on tapahtunut. Yllä näemme siis `hello.sh` tiedoston alkuperäisen ja muokatun tilan eron. Rivit joiden edessä on `+` -merkki ovat uusia.
+`git diff` näyttää mitä muutoksia edellisen indeksin päivityksen (`git add`) jälkeen on tapahtunut. Yllä näemme siis `hello.sh` tiedoston alkuperäisen ja muokatun tilan eron. Rivit joiden edessä on `+` -merkki ovat uusia.
 
-### 1.3 Blame
+#### 1.3 Blame
 
 `git blame` ennen committia ja commitin jälkeen:\
 ![git-blame](/assignments/H3/images/git-blame.png)
@@ -66,3 +68,8 @@ Jaha, viimeisin muutos jäi välistä. Toistin prosessin:\
 Muokkasin `hello.sh` -tiedostoa ja palautin sitten repositorion muokkausta edeltävään tilaan `git reset --hard` -komennolla:\
 ![git-reset](/assignments/H3/images/git-reset.png)
 
+---
+
+### 3. Salt -moduli
+
+TODO
