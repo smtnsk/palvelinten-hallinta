@@ -138,7 +138,7 @@ Last login: Tue Apr  9 17:58:39 2019 from 192.168.2.102
 smtnskn@MINION:~$ 
 ```
 
-Toimii. Laitetaan vielä ssh -service käynnistymään uudelleen aina sshd_config -tiedoston muuttuessa lisäämällä sshd -tilan loppuun seuraavaa:
+Toimii. Laitetaan vielä `ssh` -service käynnistymään uudelleen aina `sshd_config` -tiedoston muuttuessa lisäämällä `sshd` -tilan loppuun seuraavaa:
 
 ```
 [smtnskn@MASTER ~]$ sudo nano /srv/salt/sshd.sls
@@ -350,7 +350,7 @@ Tarkistetaan:
 
 ![apache-user-disabled-2](/assignments/H2/images/apache-user-disabled-2.png)
 
-Ei toimi. Unohdin käynnistää Apachen uudelleen. Laitan sivut pois päältä kuten aiemmin (```sudo a2dismod userdir```) ja korjaan tilan:
+Ei toimi. Unohdin käynnistää Apachen uudelleen. Laitan sivut pois päältä kuten aiemmin (`sudo a2dismod userdir`) ja korjaan tilan:
 ```
 [smtnskn@MASTER ~]$ sudo cat /srv/salt/apache.sls 
 apache2:
@@ -370,7 +370,7 @@ apache2:
 [smtnskn@MASTER ~]$ 
 ```
 
-Suoritan ```sudo salt '*' state.apply apache```:
+Suoritan `sudo salt '*' state.apply apache`:
 ```
 [smtnskn@MASTER ~]$ sudo salt '*' state.apply apache
 [WARNING ] /usr/lib/python2.7/site-packages/salt/payload.py:149: DeprecationWarning: encoding is deprecated, Use raw=False instead.
@@ -403,7 +403,7 @@ apache2:
   pkg.installed: []
 ```
 
-Eli muutin ```pkg.installed``` -> ```pkg.installed: []```
+Eli muutin `pkg.installed` -> `pkg.installed: []`
 Uusi uritys:
 ```
 [smtnskn@MASTER ~]$ sudo salt '*' state.apply apache
@@ -470,4 +470,4 @@ No niin! Ja kokeillaan sivua:
 
 #### 3.
 
-Ideani oli tehdä valmis profile -tiedosto bashia varten ja peilata se minion(e)ille, mutta en löytänyt Saltin dokumentaatiosta tapaa ottaa uutta tiedostoa käyttöön sen muuttuessa (eli ajaa komento ```. etc/profile```). Tuhlasin tämän tukimiseen niin paljon aikaa, että en ehtinyt enää tehdä tehtävää muulla tavalla.
+Ideani oli tehdä valmis profile -tiedosto bashia varten ja peilata se minion(e)ille, mutta en löytänyt Saltin dokumentaatiosta tapaa ottaa uutta tiedostoa käyttöön sen muuttuessa (eli ajaa komento `. /etc/profile`). Tuhlasin tämän tukimiseen niin paljon aikaa, että en ehtinyt enää tehdä tehtävää muulla tavalla.
