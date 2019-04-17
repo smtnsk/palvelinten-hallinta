@@ -43,7 +43,7 @@ Add, commit ja log:\
 #### 1.2 Diff
 
 Loin uuden tiedoston `hello.sh`:\
-![new-file](/assignments/H3/images/new-file.png)
+![touch](/assignments/H3/images/touch.png)
 
 Kutsuin tässä välissä `git add .`
 Muokkasin tiedostoa ja katsoin mitä `git diff` sanoo:\
@@ -72,4 +72,43 @@ Muokkasin `hello.sh` -tiedostoa ja palautin sitten repositorion muokkausta edelt
 
 ### 3. Salt -moduli
 
-TODO
+Asensin ja konfiguroin minionille [dnscrypt-proxyn](https://github.com/jedisct1/dnscrypt-proxy).
+
+Aloitin luomalla dnscrypt -tilalle oman hakemiston ja loin alustavan tilan, joka asentaa dnscryptin:\
+![dnscrypt-mkdir](/assignments/H3/images/dnscrypt-mkdir.png)
+![dnscrypt-sls-1](/assignments/H3/images/dnscrypt-sls-1.png)
+
+Tarkistin, että tila toimii:\
+![dnscrypt-installed](/assignments/H3/images/dnscrypt-installed.png)
+
+Jatkoin luomalla minionin dnscryptille konfiguraatiotiedoston. Käytin mallina masterin omaa konfiguraatiota:\
+(tarvitsin sudotetun shellin, jotta redirection toimisi)\
+![dnscrypt-toml-1](/assignments/H3/images/dnscrypt-toml-1.png)
+
+Lisäsin tiedoston alkuun huomautuksen ja rajasin kuuntelun localhostiin:\
+![dnscrypt-toml-2](/assignments/H3/images/dnscrypt-toml-2.png)
+![dnscrypt-toml-final](/assignments/H3/images/dnscrypt-toml-final.png)
+
+Muokkasin tilaa niin, että `dnscrypt-proxy.toml` peilataan minionille:\
+![dnscrypt-sls-2](/assignments/H3/images/dnscrypt-sls-2.png)
+
+Tarkistus:\
+![dnscrypt-managed-file-1](/assignments/H3/images/dnscrypt-managed-file-1.png)
+
+Vielä minionin puolelta:\
+![dnscrypt-managed-file-2](/assignments/H3/images/dnscrypt-managed-file-2.png)
+
+Toimihan se.
+
+Laitoin vielä dnscrypt-proxyn käynnistymään uudelleen tiedoston muuttuessa, sekä korvasin minionin `resolv.conf` -tiedoston (se osoittaa Ubuntulla oletuksena osoitteeseen `127.0.0.53`, mutta asetin dnscrypt-proxyn kuuntelemaan `127.0.0.1`):\
+![dnscrypt-sls-final](/assignments/H3/images/dnscrypt-sls-final.png)
+
+![resolv-conf](/assignments/H3/images/resolv-conf.png)
+
+Tarkistus:\
+![dnscrypt-service](/assignments/H3/images/dnscrypt-service.png)
+
+Ja minionin puolella:\
+![dnscrypt-not-working](/assignments/H3/images/dnscrypt-not-working.png)
+
+Mähnä, ei toimi. Nyt loppui kuitenkin aika, joten en ehdi taistelemaan dnscryptin kanssa enempää.
