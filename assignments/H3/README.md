@@ -74,14 +74,14 @@ Muokkasin `hello.sh` -tiedostoa ja palautin sitten repositorion muokkausta edelt
 
 Asensin ja konfiguroin minionille [dnscrypt-proxyn](https://github.com/jedisct1/dnscrypt-proxy).
 
-Aloitin luomalla dnscrypt -tilalle oman hakemiston ja loin alustavan tilan, joka asentaa dnscryptin:\
+Aloitin luomalla dnscrypt-proxy -tilalle oman hakemiston ja loin alustavan tilan, joka asentaa itse ohjelman:\
 ![dnscrypt-mkdir](/assignments/H3/images/dnscrypt-mkdir.png)
 ![dnscrypt-sls-1](/assignments/H3/images/dnscrypt-sls-1.png)
 
 Tarkistin, että tila toimii:\
 ![dnscrypt-installed](/assignments/H3/images/dnscrypt-installed.png)
 
-Jatkoin luomalla minionin dnscryptille konfiguraatiotiedoston. Käytin mallina masterin omaa konfiguraatiota:\
+Jatkoin luomalla minionin dnscrypt-proxylle konfiguraatiotiedoston. Käytin mallina masterin omaa konfiguraatiota:\
 (tarvitsin sudotetun shellin, jotta redirection toimisi)\
 ![dnscrypt-toml-1](/assignments/H3/images/dnscrypt-toml-1.png)
 
