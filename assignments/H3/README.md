@@ -112,3 +112,5 @@ Ja minionin puolella:\
 ![dnscrypt-not-working](/assignments/H3/images/dnscrypt-not-working.png)
 
 Mähnä, ei toimi. Nyt loppui kuitenkin aika, joten en ehdi taistelemaan dnscryptin kanssa enempää.
+
+**Edit:** Ach, unohdin muuttaa järjestelmän DNS-asetukset (Ubuntussa `/etc/netplan/`). Ilmankos ei toiminut.
