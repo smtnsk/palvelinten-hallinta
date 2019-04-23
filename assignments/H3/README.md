@@ -14,7 +14,7 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 Hyper-V -virtuaalikoneella pyörivä Ubuntu 18.04.2 LTS x64, isäntäkoneella Windows Embedded 8.1 Industry Pro x64.
 
-![git-clone](/assignments/H3/images/neofetch.png)
+![system](/assignments/H3/images/neofetch.png)
 
 ---
 
