@@ -10,10 +10,10 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 #### Ympäristö:
 
-**Master** (pilvipalvelin):\
+Master (pilvipalvelin):\
 ![neofetch-master](/assignments/H4/images/neofetch-master.png)
 
-**Minion** (Hyper-V nimettömällä pöytäkonellä):\
+Minion (Hyper-V nimettömällä pöytäkonellä):\
 ![neofetch-minion](/assignments/H4/images/neofetch-minion.png)
 Isäntäkoneella Windows Embedded 8.1 Industry Pro x64.
 
