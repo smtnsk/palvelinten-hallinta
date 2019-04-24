@@ -35,7 +35,7 @@ Lisäsin myös tarkistuksen, että skripti ajetaan sudo-oikeuksilla, salt-minion
 Lopputulos (julkiset IP-osoitteet piilotettu):\
 ![results](/assignments/H4/images/results.png)
 
-**Edit**: Yllä olevassa esimerkissä annan minionille nimeksi `<julkinen IP>-<hostname>`, mutta parempi idea on totta kai käyttää verkon sisäistä IP-osoitetta. Se onnistuu syöttämällä skriptin toiseksi argumentiksi `$(hostname -I)-$HOSTNAME`.
+**Edit**: Yllä olevassa esimerkissä annoin minionille nimeksi `<julkinen IP>-<hostname>`, mutta parempi idea on totta kai käyttää verkon sisäistä IP-osoitetta. Se onnistuu syöttämällä skriptin toiseksi argumentiksi `$(hostname -I)-$HOSTNAME`.
 
 Ajoin skriptin vielä huvikseni Shellcheckin läpi, ei löytynyt ongelmia:
 ![shellcheck](/assignments/H4/images/shellcheck.png)
