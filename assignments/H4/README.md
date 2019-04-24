@@ -6,7 +6,7 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 1. Tee skripti, joka tekee koneestasi salt-orjan.
 
-2. Vagrant. Asenna Vagrant. Kokeile jotain uutta kuvaa Atlaksesta. Huomaa, että kuvat ovat vieraita binäärejä, ja virtuaalikoneista on mahdollista murtautua ulos. Jokohan Ubuntun virallinen  Suodatin: VirtualBox, järjestys: Most downloads. https://app.vagrantup.com/boxes/search?provider=virtualbox
+2. Asenna Vagrant. Kokeile jotain uutta kuvaa Atlaksesta. Huomaa, että kuvat ovat vieraita binäärejä, ja virtuaalikoneista on mahdollista murtautua ulos. Jokohan Ubuntun virallinen  Suodatin: VirtualBox, järjestys: Most downloads. https://app.vagrantup.com/boxes/search?provider=virtualbox
 
 #### Ympäristö:
 
@@ -37,6 +37,45 @@ Lopputulos (julkiset IP-osoitteet piilotettu):\
 
 **Edit**: Yllä olevassa esimerkissä annan minionille nimeksi `<julkinen IP>-<hostname>`, mutta parempi idea on totta kai käyttää verkon sisäistä IP-osoitetta. Se onnistuu syöttämällä skriptin toiseksi argumentiksi `$(hostname -I)-$HOSTNAME`.
 
+Ajoin skriptin vielä huvikseni Shellcheckin läpi, ei löytynyt ongelmia:
+![shellcheck](/assignments/H4/images/shellcheck.png)
+
 ---
 
-### 2. Orja -skripti
+### 2. Vagrant
+
+(Huom: hostname on muuttunut tehtävien välillä, kyseessä on kuitenkin tismalleen sama järjestelmä)
+
+Package manager ei löytänyt Virtualboxia. Seurasin [ohjeita Virtualboxin nettisivulta](https://www.virtualbox.org/wiki/Linux_Downloads) asian korjaamiseksi.\
+Aloitin lataamalla Oraclen julkiset avaimet:\
+![oracle-keys](/assignments/H4/images/oracle-keys.png)
+
+Lisäsin Virtualbox-repositorion `/etc/apt/sources.list` -tiedostoon:\
+![apt-sources](/assignments/H4/images/apt-sources.png)
+
+Päivitin järjestelmän tiedot:\
+![apt-update](/assignments/H4/images/apt-update.png)
+
+Nyt Virtualboxin asennus onnistui:\
+![apt-install-virtualbox](/assignments/H4/images/apt-install-virtualbox.png)
+
+Asensin seuraavaksi Vagrantin komennolla `sudo apt-get install vagrant`.\
+
+`vagrant init` onnistui...\
+![vagrant-init](/assignments/H4/images/vagrant-init.png)
+
+...mutta `vagrant up --provider virtualbox` ei:\
+![vagrant-fail](/assignments/H4/images/vagrant-fail.png)
+
+Ok, Virtualbox 6.0 ei siis kelpaa. Poistin sen ja asensin 5.2:n, `sudo apt-get remove virtualbox-6.0 -y && sudo apt-get install virtualbox-5.2 -y`
+
+Nyt `ubuntu/trusty64`:n asennus lähti käyntiin:\
+![vagrant-success](/assignments/H4/images/vagrant-success.png)
+
+Mutta VM ei käynnisty, tulee timeout:\
+![vagrant-fail-2](/assignments/H4/images/vagrant-fail-2.png)
+
+Timeout tapahtuu tässä vaiheessa:\
+![vagrant-fail-3](/assignments/H4/images/vagrant-fail-3.png)
+
+Pikaisella etsimisellä netistä ei löytynyt apua, enkä ehdi tutkia asiaa enempää tällä hetkellä. Jatkoa seuraa.
