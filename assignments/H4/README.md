@@ -10,10 +10,7 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 #### Ympäristö:
 
-Master (pilvipalvelin):\
-![neofetch-master](/assignments/H4/images/neofetch-master.png)
-
-Minion (Hyper-V nimettömällä pöytäkoneella, isäntänä Windows Embedded 8.1 Industry Pro x64):\
+Hyper-V nimettömällä pöytäkoneella, isäntänä Windows Embedded 8.1 Industry Pro x64:\
 ![neofetch-minion](/assignments/H4/images/neofetch-minion.png)
 
 ---
@@ -23,21 +20,23 @@ Minion (Hyper-V nimettömällä pöytäkoneella, isäntänä Windows Embedded 8.
 Loin skriptin `minionize.sh`. Aloitin skriptin salt-asennuksella:\
 ![script-install](/assignments/H4/images/script-install.png)
 
-Kokeilin ajaa skriptin:
+Kokeilin ajaa skriptin:\
 ![run-install](/assignments/H4/images/run-install.png)
 
 Hyvin toimi.\
-Seuraavaksi on vuorossa `/etc/salt/minion` -tiedoston muokkaaminen\
+Seuraavaksi on vuorossa `/etc/salt/minion` -tiedoston muokkaaminen.\
 `awk` ja `sed` ovat kiinnostaneet jo pitkään, joten ajattelin, että nyt on oiva hetki kokeilla tehdä niillä jotain. Aloitin `sed`illä ja sain niin nopeasti sopivan komennon kasaan, että `awk` jäi kokeilematta:\
 ![sed](/assignments/H4/images/sed.png)
 
 Lisäsin komennon skriptiin ja muokkasin sen ottamaan masterin ja id:n argumentteina.\
-Lisäsin myös tarkistuksen, että skripti ajetaan sudo-oikeuksilla, salt-minionin uudelleenkäynnistyksen, sekä väliaikatietojen tulostuksen:
+Lisäsin myös tarkistuksen, että skripti ajetaan sudo-oikeuksilla, salt-minionin uudelleenkäynnistyksen, sekä väliaikatietojen tulostuksen:\
 ![script-finished](/assignments/H4/images/script-finished.png)
 
 Lopputulos (julkiset IP-osoitteet piilotettu):\
 ![results](/assignments/H4/images/results.png)
 
+**Edit**: Yllä olevassa esimerkissä annan minionille nimeksi `<julkinen IP>-<hostname>`, mutta parempi idea on totta kai käyttää verkon sisäistä IP-osoitetta. Se onnistuu syöttämällä skriptin toiseksi argumentiksi `$(hostname -I)-$HOSTNAME`.
+
 ---
 
-TODO
+### 2. Orja -skripti
