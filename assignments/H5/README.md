@@ -22,9 +22,7 @@ Masterina Parabola GNU/Linux-libre x64 pilvipalvelimella:
 
 ---
 
-### Aloitus
-
-### 1. Windowsin säätöä Linuxista käsin
+### 0. Aloitus
 
 Tarkistin masterilla, mikä `salt-master` -versio on käytössä:\
 ![master-version-1](/assignments/H5/images/master-version-1.png)
@@ -42,5 +40,27 @@ Latasin Windows-koneelle `Salt-Minion-2019.2.0-AMD64-Setup.exe`-asennusohjelman 
 
 Syötin asennuksen aikana masterin ip:n ja minionin id:n, kun niitä kysyttiin.\
 Asennus sujui ongelmitta. Hyväksyin avaimen masterilla:\
-![accept-key](/assignments/H5/images/accept-key.png)
+![salt-key](/assignments/H5/images/salt-key.png)
 
+---
+
+### 1. Windowsin säätöä Linuxista käsin
+
+Kokeilin aluksi ajaa jotain yksinkertaista komentoa:\
+![cmd-run-1](/assignments/H5/images/cmd-run-1.png)
+
+Ei onnistunut. Ilmeisesti PowerShell-komentoja ei voi ajaa suoraan. [Ratkaisu löytyi Saltin dokumentaatiosta](https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.cmdmod.html), uuri yritys:\
+![cmd-run-2](/assignments/H5/images/cmd-run-2.png)
+
+Toimi.\
+Päätin tehdä seuraavaksi tilan, joka luo uuden Hyper-V -virtuaalikoneen. Saltissa ei ole valmista Hyper-V -modulia, joten ajatukseni on kirjoittaa PowerShell-skripti, siirtää se masterilta minionille ja ajaa se.
+
+Aloitin luomalla hakemiston `/srv/salt/hyperv` ja sinne tiedoston `create-vm.ps1`:\
+![vm-script](/assignments/H5/images/vm-script.png)
+
+Seuraavaksi loin itse tilan, `/srv/salt/hyperv/init.sls`:\
+![hyperv-state](/assignments/H5/images/hyperv-state.png)
+
+Ajoin tilan:\
+
+**TODO**
