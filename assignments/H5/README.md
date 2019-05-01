@@ -33,6 +33,7 @@ Tuo Pyytton-varoitus on tullut esille aiemminkin ja se on alkanut hiertää. Kat
 Ok. Estin sitä ulisemasta:\
 ![python-warning-2](/assignments/H5/images/python-warning-2.png)
 
+`salt-master` -versio:\
 ![master-version-2](/assignments/H5/images/master-version-2.png)
 
 Latasin Windows-koneelle `Salt-Minion-2019.2.0-AMD64-Setup.exe`-asennusohjelman [Saltin kotisivuilta](https://docs.saltstack.com/en/latest/topics/installation/windows.html) ja käynnistin sen:\
