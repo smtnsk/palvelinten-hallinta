@@ -63,5 +63,23 @@ Seuraavaksi loin itse tilan, `/srv/salt/hyperv/init.sls`:\
 ![hyperv-state](/assignments/H5/images/hyperv-state.png)
 
 Ajoin tilan:\
+![scripts-not-allowed](/assignments/H5/images/scripts-not-allowed.png)
 
-**TODO**
+Ahaa, skriptien ajaminen oli kielletty. Kokeilin, voiko execution policyn muuttaa Saltin kautta:\
+![hyperv-state-executionpolicy](/assignments/H5/images/hyperv-state-executionpolicy.png)
+
+Ajoin tilan:\
+![hyperv-state-success](/assignments/H5/images/hyperv-state-success.png)
+
+Näytti toimivan. Tarkistetaan vielä:\
+![getvm-success](/assignments/H5/images/getvm-success.png)
+
+Onnistui. `TestVM` pyörii iloisesti.
+
+Lopuksi siistin tilaa hieman Jinjalla (HUOM pakeneminen 2. rivillä, `'C:\\'`):\
+![jinja](/assignments/H5/images/jinja.png)
+
+---
+
+### 2. Windowsin säätöä Saltilla paikallisesti
+
