@@ -71,10 +71,10 @@ Ahaa, skriptien ajaminen oli kielletty. Kokeilin, voiko execution policyn muutta
 Ajoin tilan:\
 ![hyperv-state-success](/assignments/H5/images/hyperv-state-success.png)
 
-Näytti toimivan. Tarkistetaan vielä:\
+Näytti toimivan. Tarkistin vielä:\
 ![getvm-success](/assignments/H5/images/getvm-success.png)
 
-Onnistui. `TestVM` pyörii iloisesti.
+Onnistui. `TestVM` pyöri iloisesti.
 
 Lopuksi siistin tilaa hieman Jinjalla (HUOM pakeneminen 2. rivillä, `'C:\\'`):\
 ![jinja](/assignments/H5/images/jinja.png)
@@ -83,3 +83,35 @@ Lopuksi siistin tilaa hieman Jinjalla (HUOM pakeneminen 2. rivillä, `'C:\\'`):\
 
 ### 2. Windowsin säätöä Saltilla paikallisesti
 
+Tässä on oiva tilaisuus kokeilla käyttää Salttia package managerina. Let's asennetaan.
+
+Aluksi yritin päivittää package repositorion:\
+![pkg-refresh-fail](/assignments/H5/images/pkg-refresh-fail.png)
+
+Hmm, mitään ei tapahtunut. Selasin [dokumentaatiota](https://docs.saltstack.com/en/latest/topics/windows/windows-package-manager.html) ja huomasin, että ensin masterilla pitää kutsua `salt-run winrepo.update_git_repos`, joten kokeilin sitä:\
+![winrepo-1](/assignments/H5/images/winrepo-1.png)
+
+Jaha. Kokeilin ajaa komennon minionilla (HUOM `salt-call` vs. `salt-run`):\
+![winrepo-2](/assignments/H5/images/winrepo-2.png)
+
+Tosiaan, minionilla ei ole Git asennettuna. Asensin sen käsin, kun kerran masterilla oli ongelmia.
+
+Yritin asennuksen jälkeen uudestaan, mutta nyt tuli valituksia, että Pyyttonia ei löydy. Lisäsin sen pathiin, `$env:path="$env:Path;C:\Users\smtnskn\AppData\Local\Programs\Python\Python37"`.
+
+Uusi yritys:\
+![winrepo-3](/assignments/H5/images/winrepo-3.png)
+
+Näytti toimivan, vaikka pukkasikin virheitä. Kokeilin ajaa `salt-call --local pkg.refresh_db`:\
+![pkg-refresh-success](/assignments/H5/images/pkg-refresh-success.png)
+
+Asensin lopuksi puttyn:\
+![putty-1](/assignments/H5/images/putty-1.png)\
+![putty-2](/assignments/H5/images/putty-2.png)
+
+Toimi. Kaikkia muita paketteja joita yritin asentaa ei Salt kuitenkaan löytänyt (`rufus, cmder, cygwin, testdisk`).
+
+---
+
+### 3. Windows -konfiguraatio Saltilla
+
+**TODO**
