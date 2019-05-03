@@ -114,4 +114,39 @@ Toimi. Kaikkia muita paketteja joita yritin asentaa ei Salt kuitenkaan löytäny
 
 ### 3. Windows -konfiguraatio Saltilla
 
+Suunnitelmana on lisätä Explorerin context menuun Disk Cleanup -toiminto rekisteriä muokkaamalla. Sain idean [täältä](https://www.online-tech-tips.com/windows-8/windows-8-registry-tweaks/).
+
+Tämän voisi helposti toteuttaa PowerShell-skriptillä kuten tein yllä, mutta huomasin, että [Saltissa on valmiina toiminto Windowsin rekisterin muokkaamiseen](https://docs.saltstack.com/en/latest/ref/states/all/salt.states.reg.html), joten kokeilin sitä.
+
+Loin hakemiston `/srv/salt/winreg` ja sinne tilan `init.sls`:\
+![winreg-sls-1](/assignments/H5/images/winreg-sls-1.png)
+
+Kokeilin ajaa tilan:\
+![winreg-apply-1](/assignments/H5/images/winreg-apply-1.png)
+
+Ok, näytti toimivan. Tein tilan loppuun:\
+![winreg-sls-2](/assignments/H5/images/winreg-sls-2.png)
+
+Kokeilin ajaa uudestaan:\
+![winreg-apply-token-error](/assignments/H5/images/winreg-apply-token-error.png)
+
+Epäilin ongelmaksi `@` -merkkiä, joten: `sed -i 's/@/"@"/' init.sls`.\
+Uusi yritys:\
+![winreg-apply-2](/assignments/H5/images/winreg-apply-2.png)
+
+No niin! Tarkistin tilanteen vielä Windows-minionin puolelta:\
+![regedit-confirm](/assignments/H5/images/regedit-confirm.png)
+
+Muutokset olivat onnistuneet. Käynnistin minionin uudelleen:\
+![minion-restart](/assignments/H5/images/minion-restart.png)
+
+Ja tarkistin context menun:\
+![context-has-cleanup](/assignments/H5/images/context-has-cleanup.png)
+
+Siellähän se. :)))
+
+---
+
+### 4. Salt-säätö omaan käyttöön
+
 **TODO**
