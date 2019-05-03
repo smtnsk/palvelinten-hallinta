@@ -36,7 +36,7 @@ Ok. Estin sitä ulisemasta:\
 `salt-master` -versio:\
 ![master-version-2](/assignments/H5/images/master-version-2.png)
 
-Latasin Windows-koneelle `Salt-Minion-2019.2.0-AMD64-Setup.exe`-asennusohjelman [Saltin kotisivuilta](https://docs.saltstack.com/en/latest/topics/installation/windows.html) ja käynnistin sen:\
+Latasin Windows-minionille `Salt-Minion-2019.2.0-AMD64-Setup.exe`-asennusohjelman [Saltin kotisivuilta](https://docs.saltstack.com/en/latest/topics/installation/windows.html) ja käynnistin sen:\
 ![win-install](/assignments/H5/images/win-install.png)
 
 Syötin asennuksen aikana masterin ip:n ja minionin id:n, kun niitä kysyttiin.\
