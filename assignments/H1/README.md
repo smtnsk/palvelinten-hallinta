@@ -6,7 +6,7 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 1. Asenna Salt Master ja Slave pull-arkkitehtuurilla (eli master on server). Voit laittaa herran ja orjan myös samalle koneelle. Kokeile suorittamalla salt:illa komentoja etänä.
 
-2. Kokeile jotain [Laineen esimerkistä](https://github.com/joonaleppalahti/CCM/tree/master/salt/srv/salt) lainattua tilaa tai tee jostain tilasta oma muunnelma. Muista testata lopputuloksen toimivuus. Huomaa, että varastossa on myös keskeneräisiäesimerkkejä, kuten Battlenet-asennus Windowsille.
+2. Kokeile jotain [Laineen esimerkistä](https://github.com/joonaleppalahti/CCM/tree/master/salt/srv/salt) lainattua tilaa tai tee jostain tilasta oma muunnelma. Muista testata lopputuloksen toimivuus. Huomaa, että varastossa on myös keskeneräisiä esimerkkejä, kuten Battlenet-asennus Windowsille.
 
 3. Kerää laitetietoja koneilta saltin grains-mekanismilla.
 
@@ -14,7 +14,7 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 ---
 
-#### 1.
+#### 1. Masterin ja minionin asennukset + komentojen suorittamista
 
 Käytössä on virtuaalikoneelle (Hyper-V) juuri asennettu ja päivitetty Ubuntu 18.04.2 LTS x64 (isäntäkoneella Windows Embedded 8.1 Industry Pro x64), joten aloitan laittamalla SSH-asetukset ja palomuurin kuntoon. 
 Kun olen saanut virtuaalikoneeseen SSH-yhteyden läppäriltäni, jatkan asentamalla Saltin:
@@ -68,7 +68,7 @@ Toimii.
 
 ---
 
-#### 2.
+#### 2. Kokeile esimerkkiä
 
 Yritän ottaa mallia [Joona Leppälahden](https://github.com/joonaleppalahti/CCM/blob/master/salt/srv/salt/firewall.sls) firewall statuksesta, mutta käyttämällä pelkkää iptablesia.
 Luodaan statukselle hakemisto ja tiedosto, joka pitää sisällään halutut iptables-säännöt:
@@ -107,7 +107,7 @@ Moving on.
 
 ---
 
-#### 3.
+#### 3. Tietojen kerääminen grainsilla
 
 Kerätään tietoja minionista Saltin grains-toiminnon avulla:
 
@@ -131,7 +131,7 @@ Kaikki grains-komennot saa listattua seuraavasti:
 
 ---
 
-#### 4.
+#### 4. Omaa kokeilua
 
 Kokeilen tehdä pilvipalvelimestani minionin ja siirtää palvelimen asetustiedostoja masterille myöhempää käyttöä varten. Todellisuudessa tämä olisi järkevämpi tehdä esim. Gitin avulla, mutta kokeillaan kuitenkin.
 Palvelimella on käyttöjärjestelmänä Arch Linuxiin pohjautuva Parabola.
