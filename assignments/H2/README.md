@@ -19,7 +19,7 @@ Lisäksi käytössä MacBook Air, hostnamella LAPTOP.
 
 ---
 
-#### 1. SSH:n asennus, Package-File-Service
+### 1. SSH:n asennus, Package-File-Service
 
 Luodaan masterilla sshd-tila:
 ```
@@ -225,7 +225,7 @@ smtnskn@MINION:~$
 ```
 ---
 
-#### 2. Apachen asennus, kotisivut näkyviin
+### 2. Apachen asennus, kotisivut näkyviin
 
 Asennetaan Apache:
 ```
@@ -468,7 +468,7 @@ No niin! Ja kokeillaan sivua:
 
 ---
 
-#### 3. Eri package-file-service
+### 3. Eri package-file-service
 
 **EDIT (04.05.2019)**: Epäonnistuin tässä tehtävässä surkeasti aiemmin, joten palasin tämän pariin korjatakseni asian.
 
