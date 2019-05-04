@@ -516,5 +516,6 @@ Korjasin asian ja kokeilin uudelleen:\
 Lupaavaa. Wireguard-yhteys nimittäin estäisi Salttia kommunikoimasta.
 
 Tässä vaiheessa ajauduin ongelmiin, sillä masterin Wireguard ei hyväksynyt minionin yhteydenottoja.\
-Keksin pian, että minionin julkinen avain oli muuttunut välillä, ehkä vahingossa, ehkä jostain muusta syystä, mutta joka tapauksessa en valitettavavsti dokumentoinut prosessia. Vaihdoin julkisen avaimen masterin puolella oikeaan ja homma alkoi toimimaan:\
+Keksin pian, että minionin julkinen avain oli muuttunut välillä, ehkä vahingossa, ehkä jostain muusta syystä, mutta joka tapauksessa en valitettavavsti dokumentoinut prosessia.\
+Vaihdoin julkisen avaimen masterin puolella oikeaan ja homma alkoi toimimaan:\
 ![wireguard-service-up-2](/assignments/H2/images/wireguard-service-up-2.png)
