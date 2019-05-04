@@ -19,7 +19,7 @@ Lisäksi käytössä MacBook Air, hostnamella LAPTOP.
 
 ---
 
-#### 1.
+#### 1. SSH:n asennus, Package-File-Service
 
 Luodaan masterilla sshd-tila:
 ```
@@ -225,7 +225,7 @@ smtnskn@MINION:~$
 ```
 ---
 
-#### 2.
+#### 2. Apachen asennus, kotisivut näkyviin
 
 Asennetaan Apache:
 ```
@@ -468,6 +468,53 @@ No niin! Ja kokeillaan sivua:
 
 ---
 
-#### 3.
+#### 3. Eri package-file-service
 
-Ideani oli tehdä valmis profile -tiedosto bashia varten ja peilata se minion(e)ille, mutta en löytänyt Saltin dokumentaatiosta tapaa ottaa uutta tiedostoa käyttöön sen muuttuessa (eli ajaa komento `. /etc/profile`). Tuhlasin tämän tukimiseen niin paljon aikaa, että en ehtinyt enää tehdä tehtävää muulla tavalla.
+**EDIT (04.05.2019)**: Epäonnistuin tässä tehtävässä surkeasti aiemmin, joten palasin tämän pariin korjatakseni asian.
+
+Ajatuksena on luoda Wireguard-tunneli masterin ja minionin välille. Masterilla on jo toimiva Wireguard asennus, jota en käy tässä läpi.
+
+Aloitin luomalla `/srv/salt/wireguard` -hakemiston ja sinne `.list` -tiedoston, jonka `apt` tarvitsee tietääkseen, mistä repositoriosta Wireguard löytyy:\
+![wireguard-repo](/assignments/H2/images/wireguard-repo.png)
+
+Luon `init.sls` -tilan, joka lähettää tuon tiedoston minionille:\
+![wireguard-sls-1](/assignments/H2/images/wireguard-sls-1.png)
+
+Kokeilin:\
+![wireguard-repo-success](/assignments/H2/images/wireguard-repo-success.png)
+
+Sitten kokeilin asentaa itse Wireguardin:\
+![wireguard-sls-2](/assignments/H2/images/wireguard-sls-2.png)
+![wireguard-install](/assignments/H2/images/wireguard-install.png)
+
+Onnistui.\
+Jatkoin luomalla minionille omat avaimet:\
+![minion-keys](/assignments/H2/images/minion-keys.png)
+
+Tämä on vain testi, joten en piittaa turvallisuusriskeistä.
+
+Loin myös minionille tunneliin tarvittavan konfiguraation, `wg0.conf`:\
+![minion-wg-conf](/assignments/H2/images/minion-wg-conf.png)
+
+Lisäsin kaikki nuo tiedostot tilaan, ja siihen päälle vielä Wireguardin käynnistyksen servicena:\
+![wireguard-sls-3](/assignments/H2/images/wireguard-sls-3.png)
+
+Muistikuvani on, että Wireguardia ei ole hyvä käyttää `systemctl`:n kautta, mutta katsotaan, miten käy:\
+![wireguard-file-missing](/assignments/H2/images/wireguard-file-missing.png)
+
+Hups, olin epähumiossa luonut `wg0.conf`:in `/srv/salt` -kansioon, joten `mv ../wg0.conf .`.\
+Muistin samalla, että en ollut kertonut Wireguardille masterin puolella, että minionin yhteydenotot ovat ok. Tein sen nyt lisäämällä masterin asetuksiin seuraavaa:\
+![wireguard-master](/assignments/H2/images/wireguard-master.png)
+
+Uusi yritys:\
+![wireguard-file-missing-2](/assignments/H2/images/wireguard-file-missing-2.png)
+
+Nyt `wg0.conf` siirtyi onnistuneesti, mutta olin tehnyt kirjoitusvirheen tilaa tehdessä (huutomerkki viimeisellä rivillä).\
+Korjasin asian ja kokeilin uudelleen:\
+![wireguard-service-up-1](/assignments/H2/images/wireguard-service-up-1.png)
+
+Lupaavaa. Wireguard-yhteys nimittäin estäisi Salttia kommunikoimasta.
+
+Tässä vaiheessa ajauduin ongelmiin, sillä masterin Wireguard ei hyväksynyt minionin yhteydenottoja.\
+Keksin pian, että minionin julkinen avain oli muuttunut välillä, ehkä vahingossa, ehkä jostain muusta syystä, mutta joka tapauksessa en valitettavavsti dokumentoinut prosessia. Vaihdoin julkisen avaimen masterin puolella oikeaan ja homma alkoi toimimaan:\
+![wireguard-service-up-2](/assignments/H2/images/wireguard-service-up-2.png)
