@@ -16,4 +16,41 @@ Master: pilvipalvelimella pyörivä Parabola GNU/Linux-libre x64:
 
 ---
 
-**TODO**
+### 1. LAMP -asennus
+
+Aloitin luomalla herra-orja arkkitehtuurin aiemmissa tehtävissä kuvatulla tavalla.\
+Kun koneet juttelivat toisilleen, loin hakemiston `/srv/salt/lamp` ja sinne tilan `init.sls`.
+
+Linux oli jo käytössä, joten aloitin Apachen ja sen PHP-lisäosan asennuksella:\
+![sls-1](/assignments/H6/images/sls-1.png)\
+![apache-php-installed-1](/assignments/H6/images/apache-php-1.png)\
+![apache-php-installed-2](/assignments/H6/images/apache-php-2.png)
+
+Onnistui.\
+Jatkoin luomalla `index.php`-tiedoston ja lisäsin sen käyttöönoton tilaan:\
+![index-php](/assignments/H6/images/index-php.png)\
+![sls-2](/assignments/H6/images/sls-2.png)
+
+Ajoin tilan:\
+![index-php-applied](/assignments/H6/images/index-php-applied.png)
+
+Ja kokeilin selaimella:\
+![index-php-browser](/assignments/H6/images/index-php-browser.png)
+
+Toimi.\
+Seuraavaksi MariaDB. Lisäsin sen asennuksen tilaan:\
+![sls-3](/assignments/H6/images/sls-3.png)
+
+Ajoin tilan:\
+![mariadb-1](/assignments/H6/images/mariadb-1.png)
+![mariadb-2](/assignments/H6/images/mariadb-2.png)
+
+Tosiaan, clientillä ja serverillä ei ole omaa serviceä. Muutin tilaa:\
+![sls-mariadb](/assignments/H6/images/sls-mariadb.png)
+
+Uusi yritys:\
+![mariadb-3](/assignments/H6/images/mariadb-3.png)
+
+Onnistui.\
+Kokeilin ajaa komentoja:\
+![mariadb-queries](/assignments/H6/images/mariadb-queries.png)
