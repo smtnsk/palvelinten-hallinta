@@ -20,7 +20,7 @@ if [ "$#" -eq "2" ]; then
     
     printf "\nModifying /etc/salt/minion ... "
 
-    sed -i "1s/^/master: $1\nid: $2\n/g" /etc/salt/minion
+    sed -i "1s/^/master: $1\nid: $2\n/" /etc/salt/minion
 
     printf "Done!"
     printf "\nRestarting salt-minion ...\n\n"
