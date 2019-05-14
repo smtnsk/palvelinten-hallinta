@@ -15,69 +15,69 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 #### Ympäristö:
 
 Minionina Windows Embedded 8.1 Industry Pro x64 nimettömällä pöytäkoneella:\
-![windows-info](/assignments/H5/screenshots/win-info.png)
+![windows-info](/assignments/h5-windows/screenshots/win-info.png)
 
 Masterina Parabola GNU/Linux-libre x64 pilvipalvelimella:
-![linux-info](/assignments/H5/screenshots/linux-info.png)
+![linux-info](/assignments/h5-windows/screenshots/linux-info.png)
 
 ---
 
 ### 0. Aloitus
 
 Tarkistin masterilla, mikä `salt-master` -versio on käytössä:\
-![master-version-1](/assignments/H5/screenshots/master-version-1.png)
+![master-version-1](/assignments/h5-windows/screenshots/master-version-1.png)
 
 Tuo Pyytton-varoitus on tullut esille aiemminkin ja se on alkanut hiertää. Katsoin, mitä löytyy `/usr/lib/python2.7/site-packages/salt/scripts.py`:n riviltä 102:\
-![python-warning-1](/assignments/H5/screenshots/python-warning-1.png)
+![python-warning-1](/assignments/h5-windows/screenshots/python-warning-1.png)
 
 Ok. Estin sitä ulisemasta:\
-![python-warning-2](/assignments/H5/screenshots/python-warning-2.png)
+![python-warning-2](/assignments/h5-windows/screenshots/python-warning-2.png)
 
 `salt-master` -versio:\
-![master-version-2](/assignments/H5/screenshots/master-version-2.png)
+![master-version-2](/assignments/h5-windows/screenshots/master-version-2.png)
 
 Latasin Windows-minionille `Salt-Minion-2019.2.0-AMD64-Setup.exe`-asennusohjelman [Saltin kotisivuilta](https://docs.saltstack.com/en/latest/topics/installation/windows.html) ja käynnistin sen:\
-![win-install](/assignments/H5/screenshots/win-install.png)
+![win-install](/assignments/h5-windows/screenshots/win-install.png)
 
 Syötin asennuksen aikana masterin ip:n ja minionin id:n, kun niitä kysyttiin.\
 Asennus sujui ongelmitta. Hyväksyin avaimen masterilla:\
-![salt-key](/assignments/H5/screenshots/salt-key.png)
+![salt-key](/assignments/h5-windows/screenshots/salt-key.png)
 
 ---
 
 ### 1. Windowsin säätöä Linuxista käsin
 
 Kokeilin aluksi ajaa jotain yksinkertaista komentoa:\
-![cmd-run-1](/assignments/H5/screenshots/cmd-run-1.png)
+![cmd-run-1](/assignments/h5-windows/screenshots/cmd-run-1.png)
 
 Ei onnistunut. Ilmeisesti PowerShell-komentoja ei voi ajaa suoraan. [Ratkaisu löytyi Saltin dokumentaatiosta](https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.cmdmod.html), uuri yritys:\
-![cmd-run-2](/assignments/H5/screenshots/cmd-run-2.png)
+![cmd-run-2](/assignments/h5-windows/screenshots/cmd-run-2.png)
 
 Toimi.\
 Päätin tehdä seuraavaksi tilan, joka luo uuden Hyper-V -virtuaalikoneen. Saltissa ei ole valmista Hyper-V -modulia, joten ajatukseni on kirjoittaa PowerShell-skripti, siirtää se masterilta minionille ja ajaa se.
 
 Aloitin luomalla hakemiston `/srv/salt/hyperv` ja sinne tiedoston `create-vm.ps1`:\
-![vm-script](/assignments/H5/screenshots/vm-script.png)
+![vm-script](/assignments/h5-windows/screenshots/vm-script.png)
 
 Seuraavaksi loin itse tilan, `/srv/salt/hyperv/init.sls`:\
-![hyperv-state](/assignments/H5/screenshots/hyperv-state.png)
+![hyperv-state](/assignments/h5-windows/screenshots/hyperv-state.png)
 
 Ajoin tilan:\
-![scripts-not-allowed](/assignments/H5/screenshots/scripts-not-allowed.png)
+![scripts-not-allowed](/assignments/h5-windows/screenshots/scripts-not-allowed.png)
 
 Ahaa, skriptien ajaminen oli kielletty. Kokeilin, voiko execution policyn muuttaa Saltin kautta:\
-![hyperv-state-executionpolicy](/assignments/H5/screenshots/hyperv-state-executionpolicy.png)
+![hyperv-state-executionpolicy](/assignments/h5-windows/screenshots/hyperv-state-executionpolicy.png)
 
 Ajoin tilan:\
-![hyperv-state-success](/assignments/H5/screenshots/hyperv-state-success.png)
+![hyperv-state-success](/assignments/h5-windows/screenshots/hyperv-state-success.png)
 
 Näytti toimivan. Tarkistin vielä:\
-![getvm-success](/assignments/H5/screenshots/getvm-success.png)
+![getvm-success](/assignments/h5-windows/screenshots/getvm-success.png)
 
 Onnistui. `TestVM` pyöri iloisesti.
 
 Lopuksi siistin tilaa hieman Jinjalla (HUOM pakeneminen 2. rivillä, `'C:\\'`):\
-![jinja](/assignments/H5/screenshots/jinja.png)
+![jinja](/assignments/h5-windows/screenshots/jinja.png)
 
 ---
 
@@ -86,27 +86,27 @@ Lopuksi siistin tilaa hieman Jinjalla (HUOM pakeneminen 2. rivillä, `'C:\\'`):\
 Tässä on oiva tilaisuus kokeilla käyttää Salttia package managerina. Let's asennetaan.
 
 Aluksi yritin päivittää package repositorion:\
-![pkg-refresh-fail](/assignments/H5/screenshots/pkg-refresh-fail.png)
+![pkg-refresh-fail](/assignments/h5-windows/screenshots/pkg-refresh-fail.png)
 
 Hmm, mitään ei tapahtunut. Selasin [dokumentaatiota](https://docs.saltstack.com/en/latest/topics/windows/windows-package-manager.html) ja huomasin, että ensin masterilla pitää kutsua `salt-run winrepo.update_git_repos`, joten kokeilin sitä:\
-![winrepo-1](/assignments/H5/screenshots/winrepo-1.png)
+![winrepo-1](/assignments/h5-windows/screenshots/winrepo-1.png)
 
 Jaha. Kokeilin ajaa komennon minionilla (HUOM `salt-call` vs. `salt-run`):\
-![winrepo-2](/assignments/H5/screenshots/winrepo-2.png)
+![winrepo-2](/assignments/h5-windows/screenshots/winrepo-2.png)
 
 Tosiaan, minionilla ei ole Git asennettuna. Asensin sen käsin, kun kerran masterilla oli ongelmia.
 
 Yritin asennuksen jälkeen uudestaan, mutta nyt tuli valituksia, että Pyyttonia ei löydy. Lisäsin sen pathiin, `$env:path="$env:Path;C:\Users\smtnskn\AppData\Local\Programs\Python\Python37"`.
 
 Uusi yritys:\
-![winrepo-3](/assignments/H5/screenshots/winrepo-3.png)
+![winrepo-3](/assignments/h5-windows/screenshots/winrepo-3.png)
 
 Näytti toimivan, vaikka pukkasikin virheitä. Kokeilin ajaa `salt-call --local pkg.refresh_db`:\
-![pkg-refresh-success](/assignments/H5/screenshots/pkg-refresh-success.png)
+![pkg-refresh-success](/assignments/h5-windows/screenshots/pkg-refresh-success.png)
 
 Asensin lopuksi puttyn:\
-![putty-1](/assignments/H5/screenshots/putty-1.png)\
-![putty-2](/assignments/H5/screenshots/putty-2.png)
+![putty-1](/assignments/h5-windows/screenshots/putty-1.png)\
+![putty-2](/assignments/h5-windows/screenshots/putty-2.png)
 
 Toimi. Kaikkia muita paketteja joita yritin asentaa ei Salt kuitenkaan löytänyt (`rufus, cmder, cygwin, testdisk`).
 
@@ -119,29 +119,29 @@ Suunnitelmana on lisätä Explorerin context menuun Disk Cleanup -toiminto rekis
 Tämän voisi helposti toteuttaa PowerShell-skriptillä kuten tein yllä, mutta huomasin, että [Saltissa on valmiina toiminto Windowsin rekisterin muokkaamiseen](https://docs.saltstack.com/en/latest/ref/states/all/salt.states.reg.html), joten kokeilin sitä.
 
 Loin hakemiston `/srv/salt/winreg` ja sinne tilan `init.sls`:\
-![winreg-sls-1](/assignments/H5/screenshots/winreg-sls-1.png)
+![winreg-sls-1](/assignments/h5-windows/screenshots/winreg-sls-1.png)
 
 Kokeilin ajaa tilan:\
-![winreg-apply-1](/assignments/H5/screenshots/winreg-apply-1.png)
+![winreg-apply-1](/assignments/h5-windows/screenshots/winreg-apply-1.png)
 
 Ok, näytti toimivan. Tein tilan loppuun:\
-![winreg-sls-2](/assignments/H5/screenshots/winreg-sls-2.png)
+![winreg-sls-2](/assignments/h5-windows/screenshots/winreg-sls-2.png)
 
 Kokeilin ajaa uudestaan:\
-![winreg-apply-token-error](/assignments/H5/screenshots/winreg-apply-token-error.png)
+![winreg-apply-token-error](/assignments/h5-windows/screenshots/winreg-apply-token-error.png)
 
 Epäilin ongelmaksi `@` -merkkiä, joten: `sed -i 's/@/"@"/' init.sls`.\
 Uusi yritys:\
-![winreg-apply-2](/assignments/H5/screenshots/winreg-apply-2.png)
+![winreg-apply-2](/assignments/h5-windows/screenshots/winreg-apply-2.png)
 
 No niin! Tarkistin tilanteen vielä Windows-minionin puolelta:\
-![regedit-confirm](/assignments/H5/screenshots/regedit-confirm.png)
+![regedit-confirm](/assignments/h5-windows/screenshots/regedit-confirm.png)
 
 Muutokset olivat onnistuneet. Käynnistin minionin uudelleen:\
-![minion-restart](/assignments/H5/screenshots/minion-restart.png)
+![minion-restart](/assignments/h5-windows/screenshots/minion-restart.png)
 
 Ja tarkistin context menun:\
-![context-has-cleanup](/assignments/H5/screenshots/context-has-cleanup.png)
+![context-has-cleanup](/assignments/h5-windows/screenshots/context-has-cleanup.png)
 
 Siellähän se. :)))
 
