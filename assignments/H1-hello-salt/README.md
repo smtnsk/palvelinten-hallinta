@@ -27,14 +27,14 @@ Kun olen saanut virtuaalikoneeseen SSH-yhteyden läppäriltäni, jatkan asentama
 Salt käyttää portteja 4505 ja 4506, mutta tällä kertaa master ja minion ovat samalla koneella, joten en avaa niitä palomuurista.
 Tarkistan statukset asennuksen jälkeen:
 
-![screenshot-1](/assignments/H1/images/screenshot-1.png)
+![screenshot-1](/assignments/H1/screenshots/screenshot-1.png)
 
 Master ja minion ovat molemmat käynnissä.
 Laitetaan ne juttelemaan toisilleen muokkaamalla minionin asetuksia:
 
 >sudo nano /etc/salt/minion
 
-![screenshot-2](/assignments/H1/images/screenshot-2.png)
+![screenshot-2](/assignments/H1/screenshots/screenshot-2.png)
 
 Tallennetaan tiedosto ylläolevien asetuksien jälkeen ja käynnistetään minioni uudestaan:
 
@@ -42,7 +42,7 @@ Tallennetaan tiedosto ylläolevien asetuksien jälkeen ja käynnistetään minio
 
 Katsotaan, mitä kävi:
 
-![screenshot-3](/assignments/H1/images/screenshot-3.png)
+![screenshot-3](/assignments/H1/screenshots/screenshot-3.png)
 
 Jaha, Salt ei salli tabulaattorin käyttöä asetuksissa. Poistetaan ne:
 
@@ -50,19 +50,19 @@ Jaha, Salt ei salli tabulaattorin käyttöä asetuksissa. Poistetaan ne:
 
 Uusi yritys:
 
-![screenshot-5](/assignments/H1/images/screenshot-5.png)
+![screenshot-5](/assignments/H1/screenshots/screenshot-5.png)
 
 Kaikki ok. Laitetaan master hyväksymään minionin avain:
 
-![screenshot-6](/assignments/H1/images/screenshot-6.png)
+![screenshot-6](/assignments/H1/screenshots/screenshot-6.png)
 
-![screenshot-7](/assignments/H1/images/screenshot-7.png)
+![screenshot-7](/assignments/H1/screenshots/screenshot-7.png)
 
 Ajetaan pari komentoa testiksi:
 
-![screenshot-8](/assignments/H1/images/screenshot-8.png)
+![screenshot-8](/assignments/H1/screenshots/screenshot-8.png)
 
-![screenshot-9](/assignments/H1/images/screenshot-9.png)
+![screenshot-9](/assignments/H1/screenshots/screenshot-9.png)
 
 Toimii.
 
@@ -73,34 +73,34 @@ Toimii.
 Yritän ottaa mallia [Joona Leppälahden](https://github.com/joonaleppalahti/CCM/blob/master/salt/srv/salt/firewall.sls) firewall statuksesta, mutta käyttämällä pelkkää iptablesia.
 Luodaan statukselle hakemisto ja tiedosto, joka pitää sisällään halutut iptables-säännöt:
 
-![screenshot-10](/assignments/H1/images/screenshot-10.png)
+![screenshot-10](/assignments/H1/screenshots/screenshot-10.png)
 
-![screenshot-11](/assignments/H1/images/screenshot-11.png)
+![screenshot-11](/assignments/H1/screenshots/screenshot-11.png)
 
 IPv6 ei ole käytössä, joten tämä riittää.
 Nollataan olemassaolevat säännöt ja sallitaan kaikki sisääntuleva liikenne (SSH on käytössä, joten laitan komennot peräkkäin, että en lukitsisi itseäni ulos):
 
-![screenshot-12](/assignments/H1/images/screenshot-12.png)
+![screenshot-12](/assignments/H1/screenshots/screenshot-12.png)
 
 Luodaan itse status:
 
-![screenshot-13](/assignments/H1/images/screenshot-13.png)
+![screenshot-13](/assignments/H1/screenshots/screenshot-13.png)
 
 Kokeillaan:
 
-![screenshot-14](/assignments/H1/images/screenshot-14.png)
+![screenshot-14](/assignments/H1/screenshots/screenshot-14.png)
 
 Hups, iptables.rules on väärässä hakemistossa. Korjataan asia:
 
-![screenshot-15](/assignments/H1/images/screenshot-15.png)
+![screenshot-15](/assignments/H1/screenshots/screenshot-15.png)
 
 Uusi yritys:
 
-![screenshot-16](/assignments/H1/images/screenshot-16.png)
+![screenshot-16](/assignments/H1/screenshots/screenshot-16.png)
 
 Tiedostoa ei löydy? Löytyypäs:
 
-![screenshot-17](/assignments/H1/images/screenshot-17.png)
+![screenshot-17](/assignments/H1/screenshots/screenshot-17.png)
 
 En keksi ratkaisua :(
 Moving on.
@@ -115,15 +115,15 @@ Kerätään tietoja minionista Saltin grains-toiminnon avulla:
 
 Tietoja tulee rivikaupalla. Tallennetaan ne tiedostoon ja lasketaan samalla rivien määrä:
 
-![screenshot-18](/assignments/H1/images/screenshot-18.png)
+![screenshot-18](/assignments/H1/screenshots/screenshot-18.png)
 
 Tässä esimerkki ensimmäisestä less-ruudullisesta:
 
-![screenshot-19](/assignments/H1/images/screenshot-19.png)
+![screenshot-19](/assignments/H1/screenshots/screenshot-19.png)
 
 Kokeillaan vielä jonkin tietyn tiedon pyytämistä minionilta:
 
-![screenshot-20](/assignments/H1/images/screenshot-20.png)
+![screenshot-20](/assignments/H1/screenshots/screenshot-20.png)
 
 Kaikki grains-komennot saa listattua seuraavasti:
 
@@ -137,11 +137,11 @@ Kokeilen tehdä pilvipalvelimestani minionin ja siirtää palvelimen asetustiedo
 Palvelimella on käyttöjärjestelmänä Arch Linuxiin pohjautuva Parabola.
 Asennan Saltin:
 
-![screenshot-21](/assignments/H1/images/screenshot-21.png)
+![screenshot-21](/assignments/H1/screenshots/screenshot-21.png)
 
 ~~Avaan tarvittavat portit pilvipalvelimen palomuuriin:~~
 
-![screenshot-22](/assignments/H1/images/screenshot-22.png)
+![screenshot-22](/assignments/H1/screenshots/screenshot-22.png)
 
 ~~Otan uuden säännön käyttöön:~~
 
@@ -152,23 +152,23 @@ Asennan Saltin:
 Muokkaan palvelimen salt-minionin osoittamaan masteria kohti ja käynnistän sen.
 Vilkaisen, näkeekö masteri sitä:
 
-![screenshot-23](/assignments/H1/images/screenshot-23.png)
+![screenshot-23](/assignments/H1/screenshots/screenshot-23.png)
 
 Kyllä, uusi avain oli odottamassa.
 Jotta tiedostojen siirto minionilta masterille cp-moduulilla olisi mahdollista, täytyy ensin muokata masterin asetuksia:
 
 >sudo nano /etc/salt/master
 
-![screenshot-24](/assignments/H1/images/screenshot-24.png)
+![screenshot-24](/assignments/H1/screenshots/screenshot-24.png)
 
 >sudo systemctl restart salt-master
 
 Kokeillaan hakea minionilta tiedostoja:
 
-![screenshot-25](/assignments/H1/images/screenshot-25.png)
+![screenshot-25](/assignments/H1/screenshots/screenshot-25.png)
 
 Näyttää toimivan. Tarkistetaan vielä, saapuivatko tiedostot:
 
-![screenshot-26](/assignments/H1/images/screenshot-26.png)
+![screenshot-26](/assignments/H1/screenshots/screenshot-26.png)
 
 Siellähän ne.

@@ -233,7 +233,7 @@ smtnskn@MINION:~$ sudo apt-get install apache2 -y
 ```
 Kokeillaan näkyykö oletussivu:
 
-![apache-default](/assignments/H2/images/apache-default.png)
+![apache-default](/assignments/H2/screenshots/apache-default.png)
 
 Luodaan käyttäjälle oma sivu ja otetaan se käyttöön:
 ```
@@ -261,7 +261,7 @@ smtnskn@MINION:~$ sudo systemctl restart apache2
 ```
 Kokeillaan näkyykö käyttäjän sivu:
 
-![apache-user-enabled](/assignments/H2/images/apache-user-enabled.png)
+![apache-user-enabled](/assignments/H2/screenshots/apache-user-enabled.png)
 
 Luodaan tila, joka automatisoi käyttäjien sivujen käyttöönoton. Katsotaan ensin, mitä asetustiedostoja tarvitsemme:
 ```
@@ -297,7 +297,7 @@ smtnskn@MINION:~$ systemctl restart apache2
 ```
 Varmistetaan:
 
-![apache-user-disabled](/assignments/H2/images/apache-user-disabled.png)
+![apache-user-disabled](/assignments/H2/screenshots/apache-user-disabled.png)
 
 Laitetaan ne takaisin päälle Saltin avulla:
 ```
@@ -348,7 +348,7 @@ Total run time: 246.759 ms
 
 Tarkistetaan:
 
-![apache-user-disabled-2](/assignments/H2/images/apache-user-disabled-2.png)
+![apache-user-disabled-2](/assignments/H2/screenshots/apache-user-disabled-2.png)
 
 Ei toimi. Unohdin käynnistää Apachen uudelleen. Laitan sivut pois päältä kuten aiemmin (`sudo a2dismod userdir`) ja korjaan tilan:
 ```
@@ -464,7 +464,7 @@ Total run time: 392.829 ms
 
 No niin! Ja kokeillaan sivua:
 
-![apache-user-enabled-2](/assignments/H2/images/apache-user-enabled-2.png)
+![apache-user-enabled-2](/assignments/H2/screenshots/apache-user-enabled-2.png)
 
 ---
 
@@ -475,47 +475,47 @@ No niin! Ja kokeillaan sivua:
 Ajatuksena on luoda Wireguard-tunneli masterin ja minionin välille. Masterilla on jo toimiva Wireguard asennus, jota en käy tässä läpi.
 
 Aloitin luomalla `/srv/salt/wireguard` -hakemiston ja sinne `.list` -tiedoston, jonka `apt` tarvitsee tietääkseen, mistä repositoriosta Wireguard löytyy:\
-![wireguard-repo](/assignments/H2/images/wireguard-repo.png)
+![wireguard-repo](/assignments/H2/screenshots/wireguard-repo.png)
 
 Luon `init.sls` -tilan, joka lähettää tuon tiedoston minionille:\
-![wireguard-sls-1](/assignments/H2/images/wireguard-sls-1.png)
+![wireguard-sls-1](/assignments/H2/screenshots/wireguard-sls-1.png)
 
 Kokeilin:\
-![wireguard-repo-success](/assignments/H2/images/wireguard-repo-success.png)
+![wireguard-repo-success](/assignments/H2/screenshots/wireguard-repo-success.png)
 
 Sitten kokeilin asentaa itse Wireguardin:\
-![wireguard-sls-2](/assignments/H2/images/wireguard-sls-2.png)
-![wireguard-install](/assignments/H2/images/wireguard-install.png)
+![wireguard-sls-2](/assignments/H2/screenshots/wireguard-sls-2.png)
+![wireguard-install](/assignments/H2/screenshots/wireguard-install.png)
 
 Onnistui.\
 Jatkoin luomalla minionille omat avaimet:\
-![minion-keys](/assignments/H2/images/minion-keys.png)
+![minion-keys](/assignments/H2/screenshots/minion-keys.png)
 
 Tämä on vain testi, joten en piittaa turvallisuusriskeistä.
 
 Loin myös minionille tunneliin tarvittavan konfiguraation, `wg0.conf`:\
-![minion-wg-conf](/assignments/H2/images/minion-wg-conf.png)
+![minion-wg-conf](/assignments/H2/screenshots/minion-wg-conf.png)
 
 Lisäsin kaikki nuo tiedostot tilaan, ja siihen päälle vielä Wireguardin käynnistyksen servicena:\
-![wireguard-sls-3](/assignments/H2/images/wireguard-sls-3.png)
+![wireguard-sls-3](/assignments/H2/screenshots/wireguard-sls-3.png)
 
 Muistikuvani on, että Wireguardia ei ole hyvä käyttää `systemctl`:n kautta, mutta katsotaan, miten käy:\
-![wireguard-file-missing](/assignments/H2/images/wireguard-file-missing.png)
+![wireguard-file-missing](/assignments/H2/screenshots/wireguard-file-missing.png)
 
 Hups, olin epähumiossa luonut `wg0.conf`:in `/srv/salt` -kansioon, joten `mv ../wg0.conf .`.\
 Muistin samalla, että en ollut kertonut Wireguardille masterin puolella, että minionin yhteydenotot ovat ok. Tein sen nyt lisäämällä masterin asetuksiin seuraavaa:\
-![wireguard-master](/assignments/H2/images/wireguard-master.png)
+![wireguard-master](/assignments/H2/screenshots/wireguard-master.png)
 
 Uusi yritys:\
-![wireguard-file-missing-2](/assignments/H2/images/wireguard-file-missing-2.png)
+![wireguard-file-missing-2](/assignments/H2/screenshots/wireguard-file-missing-2.png)
 
 Nyt `wg0.conf` siirtyi onnistuneesti, mutta olin tehnyt kirjoitusvirheen tilaa tehdessä (huutomerkki viimeisellä rivillä).\
 Korjasin asian ja kokeilin uudelleen:\
-![wireguard-service-up-1](/assignments/H2/images/wireguard-service-up-1.png)
+![wireguard-service-up-1](/assignments/H2/screenshots/wireguard-service-up-1.png)
 
 Lupaavaa. Wireguard-yhteys nimittäin estäisi Salttia kommunikoimasta.
 
 Tässä vaiheessa ajauduin ongelmiin, sillä masterin Wireguard ei hyväksynyt minionin yhteydenottoja.\
 Keksin pian, että minionin julkinen avain oli muuttunut välillä, ehkä vahingossa, ehkä jostain muusta syystä, mutta joka tapauksessa en valitettavavsti dokumentoinut prosessia.\
 Vaihdoin julkisen avaimen masterin puolella oikeaan ja homma alkoi toimimaan:\
-![wireguard-service-up-2](/assignments/H2/images/wireguard-service-up-2.png)
+![wireguard-service-up-2](/assignments/H2/screenshots/wireguard-service-up-2.png)

@@ -9,10 +9,10 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 #### Ympäristö:
 
 Minion: Hyper-V -virtuaalikoneella pyörivä Ubuntu 18.04.2 LTS x64, isäntänä Windows Embedded 8.1 Industry Pro x64 nimettömällä pöytäkoneella:\
-![neofetch-minion](/assignments/H6/images/neofetch-minion.png)
+![neofetch-minion](/assignments/H6/screenshots/neofetch-minion.png)
 
 Master: pilvipalvelimella pyörivä Parabola GNU/Linux-libre x64:
-![neofetch-master](/assignments/H6/images/neofetch-master.png)
+![neofetch-master](/assignments/H6/screenshots/neofetch-master.png)
 
 ---
 
@@ -22,35 +22,35 @@ Aloitin luomalla herra-orja arkkitehtuurin aiemmissa tehtävissä kuvatulla tava
 Kun koneet juttelivat toisilleen, loin hakemiston `/srv/salt/lamp` ja sinne tilan `init.sls`.
 
 Linux oli jo käytössä, joten aloitin Apachen ja sen PHP-lisäosan asennuksella:\
-![sls-1](/assignments/H6/images/sls-1.png)\
-![apache-php-installed-1](/assignments/H6/images/apache-php-1.png)\
-![apache-php-installed-2](/assignments/H6/images/apache-php-2.png)
+![sls-1](/assignments/H6/screenshots/sls-1.png)\
+![apache-php-installed-1](/assignments/H6/screenshots/apache-php-1.png)\
+![apache-php-installed-2](/assignments/H6/screenshots/apache-php-2.png)
 
 Onnistui.\
 Jatkoin luomalla `index.php`-tiedoston ja lisäsin sen käyttöönoton tilaan:\
-![index-php](/assignments/H6/images/index-php.png)\
-![sls-2](/assignments/H6/images/sls-2.png)
+![index-php](/assignments/H6/screenshots/index-php.png)\
+![sls-2](/assignments/H6/screenshots/sls-2.png)
 
 Ajoin tilan:\
-![index-php-applied](/assignments/H6/images/index-php-applied.png)
+![index-php-applied](/assignments/H6/screenshots/index-php-applied.png)
 
 Ja kokeilin selaimella:\
-![index-php-browser](/assignments/H6/images/index-php-browser.png)
+![index-php-browser](/assignments/H6/screenshots/index-php-browser.png)
 
 Toimi.\
 Seuraavaksi MariaDB. Lisäsin sen asennuksen tilaan:\
-![sls-3](/assignments/H6/images/sls-3.png)
+![sls-3](/assignments/H6/screenshots/sls-3.png)
 
 Ajoin tilan:\
-![mariadb-1](/assignments/H6/images/mariadb-1.png)
-![mariadb-2](/assignments/H6/images/mariadb-2.png)
+![mariadb-1](/assignments/H6/screenshots/mariadb-1.png)
+![mariadb-2](/assignments/H6/screenshots/mariadb-2.png)
 
 Tosiaan, clientillä ja serverillä ei ole omaa serviceä. Muutin tilaa:\
-![sls-mariadb](/assignments/H6/images/sls-mariadb.png)
+![sls-mariadb](/assignments/H6/screenshots/sls-mariadb.png)
 
 Uusi yritys:\
-![mariadb-3](/assignments/H6/images/mariadb-3.png)
+![mariadb-3](/assignments/H6/screenshots/mariadb-3.png)
 
 Onnistui.\
 Kokeilin ajaa komentoja:\
-![mariadb-queries](/assignments/H6/images/mariadb-queries.png)
+![mariadb-queries](/assignments/H6/screenshots/mariadb-queries.png)
