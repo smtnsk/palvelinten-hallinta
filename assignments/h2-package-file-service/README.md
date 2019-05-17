@@ -4,11 +4,11 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 #### Tehtävänanto (torstain ryhmä):
 
-1. Asenna SSH eri porttiin Package-File-Service rakenteella. Käytä service:watch -tekniikkaa niin, että demoni käynnistyy uudelleen, kun asetustiedosto muuttuu.
+1. [Asenna SSH eri porttiin Package-File-Service rakenteella. Käytä service:watch -tekniikkaa niin, että demoni käynnistyy uudelleen, kun asetustiedosto muuttuu.](#tehtava1)
 
-2. Asenna Apache käsin niin, että käyttäjien kotisivut näkyvät. Etsi muutetut tiedostot komennolla ‘find /etc/ -printf ‘%T+ %p\n’|sort’. (Muista korjata lainausmerkit oikeiksi, automaattimuotoilu usein sotkee ne). Yritä nyt tehdä tila, joka asettaa nuo tiedostot (file.symlink) paikoilleen.
+2. [Asenna Apache käsin niin, että käyttäjien kotisivut näkyvät. Etsi muutetut tiedostot komennolla ‘find /etc/ -printf ‘%T+ %p\n’|sort’. (Muista korjata lainausmerkit oikeiksi, automaattimuotoilu usein sotkee ne). Yritä nyt tehdä tila, joka asettaa nuo tiedostot (file.symlink) paikoilleen.](#tehtava2)
 
-3. Eri package-file-service. Tee package-file-service tilalla jokin eri asetus tai asennus kuin tunnilla ja tehtävän muissa kohdissa.
+3. [Eri package-file-service. Tee package-file-service tilalla jokin eri asetus tai asennus kuin tunnilla ja tehtävän muissa kohdissa.](#tehtava3)
 
 #### Ympäristö:
 
@@ -19,7 +19,7 @@ Lisäksi käytössä MacBook Air, hostnamella LAPTOP.
 
 ---
 
-### 1. SSH:n asennus, Package-File-Service
+### <a id="tehtava1">1. SSH:n asennus, Package-File-Service</a>
 
 Luodaan masterilla sshd-tila:
 ```
@@ -225,7 +225,7 @@ smtnskn@MINION:~$
 ```
 ---
 
-### 2. Apachen asennus, kotisivut näkyviin
+### <a id="tehtava2">2. Apachen asennus, kotisivut näkyviin<a/>
 
 Asennetaan Apache:
 ```
@@ -468,7 +468,7 @@ No niin! Ja kokeillaan sivua:
 
 ---
 
-### 3. Eri package-file-service
+### 3. <a id="tehtava3">Eri package-file-service</a>
 
 **EDIT (04.05.2019)**: Epäonnistuin tässä tehtävässä surkeasti aiemmin, joten palasin tämän pariin korjatakseni asian.
 
