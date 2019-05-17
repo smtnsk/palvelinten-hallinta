@@ -145,7 +145,9 @@ Asennan Saltin:
 
 ~~Otan uuden säännön käyttöön:~~
 
-~~>sudo iptables-restore < /etc/iptables/iptables.rules.wg~~
+>~~su~~\
+>~~iptables-restore < /etc/iptables/iptables.rules.wg~~\
+>~~exit~~
 
 **Edit:** Tajusin jälkeenpäin, että tämä oli täysin turhaa. Kaikki data koneiden välillä kulkee jo-sallitun Wireguard-tunnelin kautta (_-A INPUT -i wg0 -j ACCEPT_).
 
