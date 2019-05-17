@@ -82,7 +82,7 @@ Tarkistin, että tila toimii:\
 ![dnscrypt-installed](/assignments/h3-versionhallinta/screenshots/dnscrypt-installed.png)
 
 Jatkoin luomalla minionin dnscrypt-proxylle konfiguraatiotiedoston. Käytin mallina masterin omaa konfiguraatiota:\
-(tarvitsin sudotetun shellin, jotta redirection toimisi)\
+(root shell redirectionia varten)\
 ![dnscrypt-toml-1](/assignments/h3-versionhallinta/screenshots/dnscrypt-toml-1.png)
 
 Lisäsin tiedoston alkuun huomautuksen ja rajasin kuuntelun localhostiin:\
@@ -113,4 +113,4 @@ Ja minionin puolella:\
 
 Mähnä, ei toimi. Nyt loppui kuitenkin aika, joten en ehdi taistelemaan dnscryptin kanssa enempää.
 
-**Edit:** Ach, unohdin muuttaa järjestelmän DNS-asetukset (Ubuntussa `/etc/netplan/`). Ilmankos ei toiminut.
+**Edit:** Ach, unohdin, että Ubuntussa muutokset täytyy tehdä `/etc/netplan/`iin. Ilmankos ei toiminut.
