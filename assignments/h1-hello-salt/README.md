@@ -4,17 +4,17 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 #### Tehtävänanto:
 
-1. Asenna Salt Master ja Slave pull-arkkitehtuurilla (eli master on server). Voit laittaa herran ja orjan myös samalle koneelle. Kokeile suorittamalla salt:illa komentoja etänä.
+1. [Asenna Salt Master ja Slave pull-arkkitehtuurilla (eli master on server). Voit laittaa herran ja orjan myös samalle koneelle. Kokeile suorittamalla salt:illa komentoja etänä.](#tehtava1)
 
-2. Kokeile jotain [Laineen esimerkistä](https://github.com/joonaleppalahti/CCM/tree/master/salt/srv/salt) lainattua tilaa tai tee jostain tilasta oma muunnelma. Muista testata lopputuloksen toimivuus. Huomaa, että varastossa on myös keskeneräisiä esimerkkejä, kuten Battlenet-asennus Windowsille.
+2. [Kokeile jotain](#tehtava2) [Laineen esimerkistä](https://github.com/joonaleppalahti/CCM/tree/master/salt/srv/salt) [lainattua tilaa tai tee jostain tilasta oma muunnelma. Muista testata lopputuloksen toimivuus. Huomaa, että varastossa on myös keskeneräisiä esimerkkejä, kuten Battlenet-asennus Windowsille.](#tehtava2)
 
-3. Kerää laitetietoja koneilta saltin grains-mekanismilla.
+3. [Kerää laitetietoja koneilta saltin grains-mekanismilla.](#tehtava3)
 
-4. Oikeaa elämää. Säädä Saltilla jotain pientä, mutta oikeaa esimerkiksi omalta koneeltasi tai omalta virtuaalipalvelimelta. (Kannattaa kokeilla Saltia oikeassa elämässä, mutta jos se ei onnistu, rakenna jotain oikeaa konettasi vastaava virtuaaliympäristö ja tee asetus siinä).
+4. [Oikeaa elämää. Säädä Saltilla jotain pientä, mutta oikeaa esimerkiksi omalta koneeltasi tai omalta virtuaalipalvelimelta. (Kannattaa kokeilla Saltia oikeassa elämässä, mutta jos se ei onnistu, rakenna jotain oikeaa konettasi vastaava virtuaaliympäristö ja tee asetus siinä).](#tehtava4)
 
 ---
 
-#### 1. Masterin ja minionin asennukset + komentojen suorittamista
+#### <a id="tehtava1">1. Masterin ja minionin asennukset + komentojen suorittamista</a>
 
 Käytössä on virtuaalikoneelle (Hyper-V) juuri asennettu ja päivitetty Ubuntu 18.04.2 LTS x64 (isäntäkoneella Windows Embedded 8.1 Industry Pro x64), joten aloitan laittamalla SSH-asetukset ja palomuurin kuntoon. 
 Kun olen saanut virtuaalikoneeseen SSH-yhteyden läppäriltäni, jatkan asentamalla Saltin:
@@ -68,7 +68,7 @@ Toimii.
 
 ---
 
-#### 2. Kokeile esimerkkiä
+#### <a id="tehtava2">2. Kokeile esimerkkiä</a>
 
 Yritän ottaa mallia [Joona Leppälahden](https://github.com/joonaleppalahti/CCM/blob/master/salt/srv/salt/firewall.sls) firewall statuksesta, mutta käyttämällä pelkkää iptablesia.
 Luodaan statukselle hakemisto ja tiedosto, joka pitää sisällään halutut iptables-säännöt:
@@ -107,7 +107,7 @@ Moving on.
 
 ---
 
-#### 3. Tietojen kerääminen grainsilla
+#### <a id="tehtava3">3. Tietojen kerääminen grainsilla</a>
 
 Kerätään tietoja minionista Saltin grains-toiminnon avulla:
 
@@ -131,7 +131,7 @@ Kaikki grains-komennot saa listattua seuraavasti:
 
 ---
 
-#### 4. Omaa kokeilua
+#### <a id="tehtava4">4. Omaa kokeilua</a>
 
 Kokeilen tehdä pilvipalvelimestani minionin ja siirtää palvelimen asetustiedostoja masterille myöhempää käyttöä varten. Todellisuudessa tämä olisi järkevämpi tehdä esim. Gitin avulla, mutta kokeillaan kuitenkin.
 Palvelimella on käyttöjärjestelmänä Arch Linuxiin pohjautuva Parabola.
