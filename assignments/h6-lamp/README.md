@@ -4,7 +4,7 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 #### Tehtävänanto:
 
-1. Asenna LAMP Saltilla.
+1. [Asenna LAMP Saltilla.](#tehtava1)
 
 #### Ympäristö:
 
@@ -16,7 +16,7 @@ Master: pilvipalvelimella pyörivä Parabola GNU/Linux-libre x64:
 
 ---
 
-### 1. LAMP -asennus
+### <a id="tehtava1">1. LAMP -asennus</a>
 
 Aloitin luomalla herra-orja arkkitehtuurin aiemmissa tehtävissä kuvatulla tavalla.\
 Kun koneet juttelivat toisilleen, loin hakemiston `/srv/salt/lamp` ja sinne tilan `init.sls`.
