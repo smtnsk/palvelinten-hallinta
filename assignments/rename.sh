@@ -6,5 +6,3 @@ find . -type f -name "README.md" |
 		
 		sed -i '' "s|/H./|/$FOLDER/|g" "$LINE"
 	done
-
-unset FOLDER
