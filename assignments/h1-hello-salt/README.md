@@ -6,7 +6,7 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 1. [Asenna Salt Master ja Slave pull-arkkitehtuurilla (eli master on server). Voit laittaa herran ja orjan myös samalle koneelle. Kokeile suorittamalla salt:illa komentoja etänä.](#tehtava1)
 
-2. [Kokeile jotain](#tehtava2) [Laineen esimerkistä](https://github.com/joonaleppalahti/CCM/tree/master/salt/srv/salt) [lainattua tilaa tai tee jostain tilasta oma muunnelma. Muista testata lopputuloksen toimivuus. Huomaa, että varastossa on myös keskeneräisiä esimerkkejä, kuten Battlenet-asennus Windowsille.](#tehtava2)
+2. [Kokeile jotain Laineen esimerkistä lainattua tilaa tai tee jostain tilasta oma muunnelma. Muista testata lopputuloksen toimivuus. Huomaa, että varastossa on myös keskeneräisiä esimerkkejä, kuten Battlenet-asennus Windowsille.](#tehtava2)
 
 3. [Kerää laitetietoja koneilta saltin grains-mekanismilla.](#tehtava3)
 
