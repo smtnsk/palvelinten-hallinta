@@ -4,13 +4,11 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 #### Tehtävänanto:
 
-1. Säädä Windowsia Saltilla siten, että Windows on orja ja Linux on herra.
+1. [Säädä Windowsia Saltilla siten, että Windows on orja ja Linux on herra.](#tehtava1)
 
-2. Säädä Windowsia Saltilla ilman herra-orja rakennetta (salt-call –local)
+2. [Säädä Windowsia Saltilla ilman herra-orja rakennetta (salt-call –local)](#tehtava2)
 
-3. Muuta jonkin Windows-ohjelman asetuksia Saltilla. Monia ohjelmia voi säätää laittamalla asetustiedoston paikalleen, aivan kuten Linuxissa.
-
-4. Vapaaehtoinen: tee omaan käytössä olevaan (Windows, jos käytät Windowsia) koneeseesi Saltilla jokin säätö, josta on sinulle hyötyä jokapäiväisessä elämässä.
+3. [Muuta jonkin Windows-ohjelman asetuksia Saltilla. Monia ohjelmia voi säätää laittamalla asetustiedoston paikalleen, aivan kuten Linuxissa.](#tehtava3)
 
 #### Ympäristö:
 
@@ -45,7 +43,7 @@ Asennus sujui ongelmitta. Hyväksyin avaimen masterilla:\
 
 ---
 
-### 1. Windowsin säätöä Linuxista käsin
+### <a id="tehtava1">1. Windowsin säätöä Linuxista käsin</a>
 
 Kokeilin aluksi ajaa jotain yksinkertaista komentoa:\
 ![cmd-run-1](/assignments/h5-windows/screenshots/cmd-run-1.png)
@@ -81,7 +79,7 @@ Lopuksi siistin tilaa hieman Jinjalla (HUOM pakeneminen 2. rivillä, `'C:\\'`):\
 
 ---
 
-### 2. Windowsin säätöä Saltilla paikallisesti
+### <a id="tehtava2">2. Windowsin säätöä Saltilla paikallisesti</a>
 
 Tässä on oiva tilaisuus kokeilla käyttää Salttia package managerina. Let's asennetaan.
 
@@ -112,7 +110,7 @@ Toimi. Kaikkia muita paketteja joita yritin asentaa ei Salt kuitenkaan löytäny
 
 ---
 
-### 3. Windows -konfiguraatio Saltilla
+### <a id="tehtava3">3. Windows -konfiguraatio Saltilla</a>
 
 Suunnitelmana on lisätä Explorerin context menuun Disk Cleanup -toiminto rekisteriä muokkaamalla. Sain idean [täältä](https://www.online-tech-tips.com/windows-8/windows-8-registry-tweaks/).
 
@@ -144,9 +142,3 @@ Ja tarkistin context menun:\
 ![context-has-cleanup](/assignments/h5-windows/screenshots/context-has-cleanup.png)
 
 Siellähän se. :)))
-
----
-
-### 4. Salt-säätö omaan käyttöön
-
-**TODO**
