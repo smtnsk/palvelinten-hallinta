@@ -4,9 +4,9 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 #### Tehtävänanto:
 
-1. Tee skripti, joka tekee koneestasi salt-orjan.
+1. [Tee skripti, joka tekee koneestasi salt-orjan.](#tehtava1)
 
-2. Asenna Vagrant. Kokeile jotain uutta kuvaa Atlaksesta. Huomaa, että kuvat ovat vieraita binäärejä, ja virtuaalikoneista on mahdollista murtautua ulos. Jokohan Ubuntun virallinen  Suodatin: VirtualBox, järjestys: Most downloads. https://app.vagrantup.com/boxes/search?provider=virtualbox
+2. [Asenna Vagrant. Kokeile jotain uutta kuvaa Atlaksesta. Huomaa, että kuvat ovat vieraita binäärejä, ja virtuaalikoneista on mahdollista murtautua ulos.](#tehtava2)
 
 #### Ympäristö:
 
@@ -15,7 +15,7 @@ Hyper-V nimettömällä pöytäkoneella, isäntänä Windows Embedded 8.1 Indust
 
 ---
 
-### 1. Orja -skripti
+### <a id="tehtava1">1. Orja -skripti</a>
 
 Loin skriptin `minionize.sh`. Aloitin skriptin salt-asennuksella:\
 ![script-install](/assignments/h4-orja-vagrant/screenshots/script-install.png)
@@ -42,7 +42,7 @@ Ajoin skriptin vielä huvikseni Shellcheckin läpi, ei löytynyt ongelmia:
 
 ---
 
-### 2. Vagrant
+### <a id="tehtava2">2. Vagrant</a>
 
 (Huom: hostname on muuttunut tehtävien välillä, kyseessä on kuitenkin tismalleen sama järjestelmä)
 
