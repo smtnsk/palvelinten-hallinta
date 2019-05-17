@@ -4,11 +4,11 @@ http://terokarvinen.com/2018/aikataulu-palvelinten-hallinta-ict4tn022-3003-ti-ja
 
 #### Tehtävänanto:
 
-1. Näytä omalla salt-varastollasi esimerkit komennoista ‘git log’, ‘git diff’ ja ‘git blame’. Selitä tulokset.
+1. [Näytä omalla salt-varastollasi esimerkit komennoista ‘git log’, ‘git diff’ ja ‘git blame’. Selitä tulokset.](#tehtava1)
 
-2. Tee tyhmä muutos gittiin, älä tee commit:tia. Tuhoa huonot muutokset ‘git reset –hard’. Huomaa, että tässä toiminnossa ei ole peruutusnappia.
+2. [Tee tyhmä muutos gittiin, älä tee commit:tia. Tuhoa huonot muutokset ‘git reset –hard’. Huomaa, että tässä toiminnossa ei ole peruutusnappia.](#tehtava2)
 
-3. Tee uusi salt-moduli. Voit asentaa ja konfiguroida minkä vain uuden ohjelman: demonin, työpöytäohjelman tai komentokehotteesta toimivan ohjelman. Käytä tarvittaessa ‘find -printf “%T+ %p\n”|sort’ löytääksesi uudet asetustiedostot.
+3. [Tee uusi salt-moduli. Voit asentaa ja konfiguroida minkä vain uuden ohjelman: demonin, työpöytäohjelman tai komentokehotteesta toimivan ohjelman. Käytä tarvittaessa ‘find -printf “%T+ %p\n”|sort’ löytääksesi uudet asetustiedostot.](#tehtava3)
 
 #### Ympäristö:
 
@@ -28,7 +28,7 @@ Jatkoin kloonamalla tätä tehtävää varten luomani repositorion:\
 
 ---
 
-### 1. Komennot ‘git log’, ‘git diff’ ja ‘git blame’.
+### <a id="tehtava1">1. Komennot ‘git log’, ‘git diff’ ja ‘git blame’.</a>
 
 #### 1.1 Log
 
@@ -63,14 +63,14 @@ Jaha, viimeisin muutos jäi välistä. Toistin prosessin:\
 
 ---
 
-### 2 Tuhoa huonot muutokset ‘git reset –hard’ -komennolla
+### <a id="tehtava2">2. Tuhoa huonot muutokset ‘git reset –hard’ -komennolla</a>
 
 Muokkasin `hello.sh` -tiedostoa ja palautin sitten repositorion muokkausta edeltävään tilaan `git reset --hard` -komennolla:\
 ![git-reset](/assignments/h3-versionhallinta/screenshots/git-reset.png)
 
 ---
 
-### 3. Salt -moduli
+### <a id="tehtava3">3. Salt -moduli</a>
 
 Asensin ja konfiguroin minionille [dnscrypt-proxyn](https://github.com/jedisct1/dnscrypt-proxy).
 
