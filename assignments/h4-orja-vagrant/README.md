@@ -59,7 +59,7 @@ Päivitin järjestelmän tiedot:\
 Nyt Virtualboxin asennus onnistui:\
 ![apt-install-virtualbox](/assignments/h4-orja-vagrant/screenshots/apt-install-virtualbox.png)
 
-Asensin seuraavaksi Vagrantin komennolla `sudo apt-get install vagrant`.\
+Asensin seuraavaksi Vagrantin komennolla `sudo apt-get install vagrant`.
 
 `vagrant init` onnistui...\
 ![vagrant-init](/assignments/h4-orja-vagrant/screenshots/vagrant-init.png)
@@ -78,4 +78,4 @@ Mutta VM ei käynnisty, tulee timeout:\
 Timeout tapahtuu tässä vaiheessa:\
 ![vagrant-fail-3](/assignments/h4-orja-vagrant/screenshots/vagrant-fail-3.png)
 
-Pikaisella etsimisellä netistä ei löytynyt apua, enkä ehdi tutkia asiaa enempää tällä hetkellä. Jatkoa seuraa.
+Pikaisella etsimisellä netistä ei löytynyt apua, enkä ehdi tutkia asiaa enempää tällä hetkellä.
